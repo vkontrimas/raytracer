@@ -171,3 +171,23 @@ TEST_CASE("Vec3 binary operators", "[vec3][operators]") {
         REQUIRE(scalar == 5.0f);
     }
 }
+
+TEST_CASE("Vec3 magnitude", "[vec3]") {
+    Vec3 a(5.0f, 3.0f, -11.0f);
+    SECTION("Square magnitude") {
+        REQUIRE(a.sqrMagnitude() == Approx(155.0f));
+    }
+
+    SECTION("Magnitude") {
+        REQUIRE(a.magnitude() == Approx(12.449f).margin(0.002f));
+    }
+
+    Vec3 b(10.0f, 2.0f, 100.0f);
+    SECTION("Square magnitude") {
+        REQUIRE(b.sqrMagnitude() == Approx(10104.0f));
+    }
+
+    SECTION("Magnitude") {
+        REQUIRE(b.magnitude() == Approx(100.518f).margin(0.002f));
+    }
+}

@@ -18,6 +18,9 @@ namespace raylib {
         Vec3 &operator/=(float scalar);
         Vec3 operator+();
         Vec3 operator-();
+
+        float sqrMagnitude();
+        float magnitude();
     };
 
     bool operator==(Vec3 lhs, Vec3 rhs);
