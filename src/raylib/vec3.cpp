@@ -21,5 +21,8 @@ namespace raylib {
     Vec3 operator/(float scalar, Vec3 rhs) { return {}; }
     Vec3 operator/(Vec3 lhs, float scalar) { return {}; }
 
-    std::ostream &operator<<(std::ostream &stream, Vec3 rhs) { return stream; }
+    std::ostream &operator<<(std::ostream &stream, Vec3 rhs) {
+        stream << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";
+        return stream;
+    }
 }
