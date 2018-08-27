@@ -1,6 +1,7 @@
 #include <raylib/vec3.hpp>
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 
 namespace raylib {
     Vec3::Vec3() : x(0.0f), y(0.0f), z(0.0f) {}
@@ -84,5 +85,13 @@ namespace raylib {
             "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";
         stream << string_stream.str();
         return stream;
+    }
+
+    float Vec3::sqrMagnitude() {
+        return x * x + y * y + z * z;
+    }
+
+    float Vec3::magnitude() {
+        return std::sqrt(x * x + y * y + z * z);
     }
 }

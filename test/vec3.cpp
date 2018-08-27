@@ -179,7 +179,7 @@ TEST_CASE("Vec3 magnitude", "[vec3]") {
     }
 
     SECTION("Magnitude") {
-        REQUIRE(a.magnitude() == Approx(12.449f).margin(0.002f));
+        REQUIRE(a.magnitude() == Approx(12.449f).epsilon(0.001f));
     }
 
     Vec3 b(10.0f, 2.0f, 100.0f);
