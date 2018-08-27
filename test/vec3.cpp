@@ -54,12 +54,12 @@ TEST_CASE("Vec3 stream insertion operator", "[vec3][operators]") {
     
     SECTION("A") {
         stream << a;
-        REQUIRE_THAT(stream.str(), Equals("(1.0, 2.0, 3.0)"));
+        REQUIRE_THAT(stream.str(), Equals("(1.000, 2.000, 3.000)"));
     }
 
     SECTION("B") {
         stream << b;
-        REQUIRE_THAT(stream.str(), Equals("(-10.0, 10.0, 11.0)"));
+        REQUIRE_THAT(stream.str(), Equals("(-10.000, 10.000, 11.000)"));
     }
 }
 
