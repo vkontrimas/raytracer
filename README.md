@@ -23,6 +23,6 @@ Build the project and run `rayexe/ray` (or `rayexe/ray.exe` on Windows) within t
 Build the project with the `BUILD_TESTING` option enabled. Then, run `raytest/testray` (or `raytest/testray.exe` on
 Windows) within the build directory.
 
-For testing, the project depends on [Catch2](https://github.com/catchorg/Catch2) which is automatically downloaded by
-cloning the git repository when the project is built using CMake.
+The project depends on [Catch2](https://github.com/catchorg/Catch2) for testing. It is automatically downloaded by
+cloning the git repository when the project is built using CMake with `BUILD_TESTING` enabled.
 
