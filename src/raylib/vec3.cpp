@@ -41,14 +41,38 @@ namespace raylib {
         return Vec3(-x, -y, -z); 
     }
 
-    bool operator==(Vec3 lhs, Vec3 rhs) { return false; }
-    bool operator!=(Vec3 lhs, Vec3 rhs) { return false; }
-    Vec3 operator+(Vec3 lhs, Vec3 rhs) { return {}; }
-    Vec3 operator-(Vec3 lhs, Vec3 rhs) { return {}; }
-    Vec3 operator*(float scalar, Vec3 rhs) { return {}; }
-    Vec3 operator*(Vec3 lhs, float scalar) { return {}; }
-    Vec3 operator/(float scalar, Vec3 rhs) { return {}; }
-    Vec3 operator/(Vec3 lhs, float scalar) { return {}; }
+    bool operator==(Vec3 lhs, Vec3 rhs) { 
+        return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
+    }
+
+    bool operator!=(Vec3 lhs, Vec3 rhs) { 
+        return !(lhs == rhs); 
+    } 
+
+    Vec3 operator+(Vec3 lhs, Vec3 rhs) { 
+        lhs += rhs;
+        return lhs; 
+    }
+
+    Vec3 operator-(Vec3 lhs, Vec3 rhs) { 
+        lhs -= rhs;
+        return lhs;
+    }
+
+    Vec3 operator*(float scalar, Vec3 rhs) { 
+        rhs *= scalar;
+        return rhs; 
+    }
+
+    Vec3 operator*(Vec3 lhs, float scalar) { 
+        lhs *= scalar;
+        return lhs;
+    }
+
+    Vec3 operator/(Vec3 lhs, float scalar) {
+        lhs /= scalar;
+        return lhs;
+    }
 
     std::ostream &operator<<(std::ostream &stream, Vec3 rhs) {
         stream << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";

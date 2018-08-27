@@ -26,7 +26,6 @@ namespace raylib {
     Vec3 operator-(Vec3 lhs, Vec3 rhs);
     Vec3 operator*(float scalar, Vec3 rhs);
     Vec3 operator*(Vec3 lhs, float scalar);
-    Vec3 operator/(float scalar, Vec3 rhs);
     Vec3 operator/(Vec3 lhs, float scalar);
 
     std::ostream &operator<<(std::ostream &stream, Vec3 rhs);
