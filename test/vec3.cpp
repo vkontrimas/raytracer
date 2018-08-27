@@ -25,7 +25,7 @@ TEST_CASE("Vec3 initialization", "[vec3][init]") {
     }
 }
 
-TEST_CASE("Vec3 comparison operators", "[vec3][operators]") {
+TEST_CASE("Vec3 comparison operators", "[vec3][operators][math]") {
     Vec3 a(1.0f, 2.0f, 3.0f);
     Vec3 b(-10.0f, 10.0f, 11.0f);
     Vec3 c(1.0f, 2.0f, 3.0f);
@@ -41,7 +41,7 @@ TEST_CASE("Vec3 comparison operators", "[vec3][operators]") {
     }
 }
 
-TEST_CASE("Vec3 stream insertion operator", "[vec3][operators]") {
+TEST_CASE("Vec3 stream insertion operator", "[vec3][operators][math]") {
     using Catch::Matchers::Equals;
 
     Vec3 a(1.0f, 2.0f, 3.0f);
@@ -63,7 +63,7 @@ TEST_CASE("Vec3 stream insertion operator", "[vec3][operators]") {
     }
 }
 
-TEST_CASE("Vec3 assignment operators", "[vec3][operators]") {
+TEST_CASE("Vec3 assignment operators", "[vec3][operators][math]") {
     Vec3 a(1.0f, 2.0f, 3.0f);
     REQUIRE(a == Vec3(1.0f, 2.0f, 3.0f));
 
@@ -111,7 +111,7 @@ TEST_CASE("Vec3 assignment operators", "[vec3][operators]") {
     }
 }
 
-TEST_CASE("Vec3 unary operators", "[vec3][operators]") {
+TEST_CASE("Vec3 unary operators", "[vec3][operators][math]") {
     Vec3 a(1.0f, 2.0f, -3.0f);
     REQUIRE(a == Vec3(1.0f, 2.0f, -3.0f));
 
@@ -124,7 +124,7 @@ TEST_CASE("Vec3 unary operators", "[vec3][operators]") {
     }
 }
 
-TEST_CASE("Vec3 binary operators", "[vec3][operators]") {
+TEST_CASE("Vec3 binary operators", "[vec3][operators][math]") {
     Vec3 a(1.0f, 2.0f, 3.0f);
     REQUIRE(a == Vec3(1.0f, 2.0f, 3.0f));
 
@@ -172,7 +172,7 @@ TEST_CASE("Vec3 binary operators", "[vec3][operators]") {
     }
 }
 
-TEST_CASE("Vec3 magnitude", "[vec3]") {
+TEST_CASE("Vec3 magnitude", "[vec3][math]") {
     Vec3 a(5.0f, 3.0f, -11.0f);
     SECTION("Square magnitude") {
         REQUIRE(a.sqrMagnitude() == Approx(155.0f));
