@@ -1,4 +1,6 @@
 #include <raylib/vec3.hpp>
+#include <sstream>
+#include <iomanip>
 
 namespace raylib {
     Vec3::Vec3() : x(0.0f), y(0.0f), z(0.0f) {}
@@ -75,7 +77,12 @@ namespace raylib {
     }
 
     std::ostream &operator<<(std::ostream &stream, Vec3 rhs) {
-        stream << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";
+        // Using a stringstream to 'quarantine' stream manipulators to this function.
+        // (Don't want to affect the existing state of the output stream.)
+        std::stringstream string_stream;
+        string_stream << std::showpoint << std::fixed << std::setprecision(3) <<
+            "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";
+        stream << string_stream.str();
         return stream;
     }
 }
