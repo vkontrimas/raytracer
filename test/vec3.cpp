@@ -263,3 +263,40 @@ TEST_CASE("Vec3 dot product", "[vec3][math]") {
         }
     }
 }
+
+TEST_CASE("Vec3 cross product", "[vec3][math]") {
+    SECTION("Cardinal axes") {
+        Vec3 x(1.0f, 0.0f, 0.0f);
+        Vec3 y(0.0f, 1.0f, 0.0f);
+        Vec3 z(0.0f, 0.0f, 1.0f);
+
+        SECTION("X x Y") {
+            REQUIRE(x.cross(y) == z);
+            REQUIRE(x == Vec3(1.0f, 0.0f, 0.0f));
+            REQUIRE(y == Vec3(0.0f, 1.0f, 0.0f));
+        }
+
+        SECTION("Y x Z") {
+            REQUIRE(y.cross(z) == x);
+            REQUIRE(y == Vec3(0.0f, 1.0f, 0.0f));
+            REQUIRE(z == Vec3(0.0f, 0.0f, 1.0f));
+        }
+
+        SECTION("Z x X") {
+            REQUIRE(z.cross(x) == y);
+            REQUIRE(z == Vec3(0.0f, 0.0f, 1.0f));
+            REQUIRE(y == Vec3(0.0f, 1.0f, 0.0f));
+        }
+    }
+
+    SECTION("Interesting vectors") {
+        Vec3 a(0.227f, 0.593f, 0.772f);
+        Vec3 b(0.139f, 0.839f, 0.524f);
+        Vec3 cross = a.cross(b);
+        CHECK(cross.x == Approx(-0.336f).epsilon(0.01f));
+        CHECK(cross.y == Approx(-0.01164f).epsilon(0.01f));
+        CHECK(cross.z == Approx(0.108f).epsilon(0.01f));
+        REQUIRE(a == Vec3(0.227f, 0.593f, 0.772f));
+        REQUIRE(b == Vec3(0.139f, 0.839f, 0.524f));
+    }
+}

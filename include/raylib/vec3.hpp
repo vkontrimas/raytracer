@@ -23,6 +23,7 @@ namespace raylib {
         float magnitude();
 
         float dot(Vec3 other);
+        Vec3 cross(Vec3 other);
     };
 
     bool operator==(Vec3 lhs, Vec3 rhs);
