@@ -1,3 +1,3 @@
-add_library(raylib STATIC placeholder.cpp)
+add_library(raylib STATIC vec3.cpp)
 target_compile_features(raylib PRIVATE cxx_std_11)
 target_include_directories(raylib PUBLIC "${PROJECT_SOURCE_DIR}/include")
