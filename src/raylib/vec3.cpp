@@ -94,4 +94,8 @@ namespace raylib {
     float Vec3::magnitude() {
         return std::sqrt(x * x + y * y + z * z);
     }
+
+    float Vec3::dot(Vec3 other) {
+        return x * other.x + y * other.y + z * other.z;
+    }
 }

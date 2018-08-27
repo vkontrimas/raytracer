@@ -191,3 +191,75 @@ TEST_CASE("Vec3 magnitude", "[vec3][math]") {
         REQUIRE(b.magnitude() == Approx(100.518f).margin(0.002f));
     }
 }
+
+TEST_CASE("Vec3 dot product", "[vec3][math]") {
+    SECTION("Simple vectors") {
+        Vec3 a(1.0f, 0.0f, 0.0f);
+
+        SECTION("Parallel") {
+            Vec3 b(10.0f, 0.0f, 0.0f);
+            Vec3 c(0.2f, 0.0f, 0.0f);
+            CHECK(a.dot(b) == Approx(10.0f).epsilon(0.01f));
+            CHECK(a.dot(c) == Approx(0.2f).epsilon(0.01f));
+            REQUIRE(a == Vec3(1.0f, 0.0f, 0.0f));
+            REQUIRE(b == Vec3(10.0f, 0.0f, 0.0f));
+            REQUIRE(c == Vec3(0.2f, 0.0f, 0.0f));
+        }
+
+        SECTION("Perpendicular") {
+            Vec3 b(0.0f, 10.0f, 0.0f);
+            Vec3 c(0.0f, 0.0f, 1240.0f);
+            CHECK(a.dot(b) == Approx(0.0f).epsilon(0.01f));
+            CHECK(a.dot(c) == Approx(0.0f).epsilon(0.01f));
+            REQUIRE(a == Vec3(1.0f, 0.0f, 0.0f));
+            REQUIRE(b == Vec3(0.0f, 10.0f, 0.0f));
+            REQUIRE(c == Vec3(0.0f, 0.0f, 1240.0f));
+        }
+
+        SECTION("Mix") {
+            Vec3 b(6.85f, 4.79f, 5.48f);
+            CHECK(a.dot(b) == Approx(6.85f).epsilon(0.01f));
+            REQUIRE(a == Vec3(1.0f, 0.0f, 0.0f));
+            REQUIRE(b == Vec3(6.85f, 4.79f, 5.48f));
+        }
+    }
+
+    SECTION("Interesting vectors") {
+        Vec3 a(0.685f, 0.479f, 0.548f);
+
+        SECTION("Parallel") {
+            Vec3 b(6.85f, 4.79f, 5.48f);
+            Vec3 c(0.0685f, 0.0479f, 0.0548f);
+            CHECK(a.dot(b) == Approx(10.0f).epsilon(0.01f));
+            CHECK(a.dot(c) == Approx(0.1f).epsilon(0.01f));
+            REQUIRE(a == Vec3(0.685f, 0.479f, 0.548f));
+            REQUIRE(b == Vec3(6.85f, 4.79f, 5.48f));
+            REQUIRE(c == Vec3(0.0685f, 0.0479f, 0.0548f));
+        }
+
+        SECTION("Perpendicular") {
+            Vec3 b(0.0f, 0.752f, -0.657f);
+            Vec3 c(0.0f, 7.52f, -6.57f);
+            CHECK(a.dot(b) == Approx(0.0f).margin(0.01f));
+            CHECK(a.dot(c) == Approx(0.0f).margin(0.01f));
+            REQUIRE(a == Vec3(0.685f, 0.479f, 0.548f));
+            REQUIRE(b == Vec3(0.0f, 0.752f, -0.657f));
+            REQUIRE(c == Vec3(0.0f, 7.52f, -6.57f));
+        }
+
+        SECTION("Mix") {
+            Vec3 b(0.328f, 0.164f, 0.930f);
+            Vec3 c(34.8f, 16.4f, 93.0f);
+            CHECK(a.dot(b) == Approx(0.812f).epsilon(0.01f));
+            CHECK(a.dot(c) == Approx(82.65f).epsilon(0.01f));
+            REQUIRE(a == Vec3(0.685f, 0.479f, 0.548f));
+            REQUIRE(b == Vec3(0.328f, 0.164f, 0.930f));
+            REQUIRE(c == Vec3(34.8f, 16.4f, 93.0f));
+        }
+
+        SECTION("Itself") {
+            CHECK(a.dot(a) == Approx(1.0f).epsilon(0.01f));
+            REQUIRE(a == Vec3(0.685f, 0.479f, 0.548f));
+        }
+    }
+}

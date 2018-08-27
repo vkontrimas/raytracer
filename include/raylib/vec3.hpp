@@ -21,6 +21,8 @@ namespace raylib {
 
         float sqrMagnitude();
         float magnitude();
+
+        float dot(Vec3 other);
     };
 
     bool operator==(Vec3 lhs, Vec3 rhs);
