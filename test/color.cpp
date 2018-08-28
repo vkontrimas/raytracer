@@ -12,6 +12,14 @@ TEST_CASE("Color initialization", "[color][init]") {
         CHECK(color.a == 1.0f);
     }
 
+    SECTION("Single value") {
+        Color color(2.0f);
+        CHECK(color.r == 2.0f);
+        CHECK(color.g == 2.0f);
+        CHECK(color.b == 2.0f);
+        CHECK(color.a == 1.0f);
+    }
+
     SECTION("RGB, default A") {
         Color color(1.0f, 2.0f, 3.0f);
         CHECK(color.r == 1.0f);
