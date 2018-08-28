@@ -24,20 +24,30 @@ TEST_CASE("Image initialization", "[image][init]") {
 TEST_CASE("Image pixel access", "[image]") {
     Image image(100, 100);
 
-    SECTION("Read") {
-        Color sum;
+    SECTION("Write & Read") {
+        Color red(1.0f, 0.0f, 0.0f);
         for (int y = 0; y < image.height(); ++y) {
             for (int x = 0; x < image.width(); ++x) {
-                sum += image.pixelAt(x, y);
+                INFO("Pixel @ X: " << x << ", Y: " << y);
+                image.pixelAt(x, y) = red;
+            }
+        }
+
+        for (int y = 0; y < image.height(); ++y) {
+            for (int x = 0; x < image.width(); ++x) {
+                INFO("Pixel @ X: " << x << ", Y: " << y);
+                REQUIRE(image.pixelAt(x, y) == red);
             }
         }
     }
 
-    SECTION("Write") {
-        Color red(1.0f, 0.0f, 0.0f);
+    SECTION("Read (const)") {
+        const Image &ref = image;
+
         for (int y = 0; y < image.height(); ++y) {
             for (int x = 0; x < image.width(); ++x) {
-                image.pixelAt(x, y) = red;
+                INFO("Pixel @ X: " << x << ", Y: " << y);
+                ref.pixelAt(x, y);
             }
         }
     }
