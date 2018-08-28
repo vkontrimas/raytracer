@@ -25,6 +25,12 @@ namespace raylib {
     bool operator==(Color lhs, Color rhs);
     bool operator!=(Color lhs, Color rhs);
 
+    Color operator+(Color lhs, Color rhs);
+    Color operator-(Color lhs, Color rhs);
+    Color operator*(Color lhs, Color rhs);
+    Color operator*(Color lhs, float rhs);
+    Color operator/(Color lhs, float rhs);
+
     std::ostream &operator<<(std::ostream &stream, Color color);
 }
 

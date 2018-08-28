@@ -187,3 +187,83 @@ TEST_CASE("Color assignment operators", "[color][operators]") {
         CHECK(s == 1.5f);
     }
 }
+
+TEST_CASE("Color binary operators", "[color][operators]") {
+    Color a(1.0f, 2.0f, 3.0f, 0.1f);
+    Color b(2.0f, 4.0f, 6.0f, 0.2f);
+    float s = 1.5f;
+
+    SECTION("Addition") {
+        Color result = a + b;
+        CHECK(result.r == Approx(3.0f));
+        CHECK(result.g == Approx(6.0f));
+        CHECK(result.b == Approx(9.0f));
+        CHECK(result.a == Approx(0.3f));
+        CHECK(a.r == 1.0f);
+        CHECK(a.g == 2.0f);
+        CHECK(a.b == 3.0f);
+        CHECK(a.a == 0.1f);
+        CHECK(b.r == 2.0f);
+        CHECK(b.g == 4.0f);
+        CHECK(b.b == 6.0f);
+        CHECK(b.a == 0.2f);
+    }
+
+    SECTION("Subtraction") {
+        Color result = a - b;
+        CHECK(result.r == Approx(-1.0f));
+        CHECK(result.g == Approx(-2.0f));
+        CHECK(result.b == Approx(-3.0f));
+        CHECK(result.a == Approx(-0.1f));
+        CHECK(a.r == 1.0f);
+        CHECK(a.g == 2.0f);
+        CHECK(a.b == 3.0f);
+        CHECK(a.a == 0.1f);
+        CHECK(b.r == 2.0f);
+        CHECK(b.g == 4.0f);
+        CHECK(b.b == 6.0f);
+        CHECK(b.a == 0.2f);
+    }
+
+    SECTION("Color - Color multiplication") {
+        Color result = a * b;
+        CHECK(result.r == Approx(2.0f));
+        CHECK(result.g == Approx(8.0f));
+        CHECK(result.b == Approx(18.0f));
+        CHECK(result.a == Approx(0.02f));
+        CHECK(a.r == 1.0f);
+        CHECK(a.g == 2.0f);
+        CHECK(a.b == 3.0f);
+        CHECK(a.a == 0.1f);
+        CHECK(b.r == 2.0f);
+        CHECK(b.g == 4.0f);
+        CHECK(b.b == 6.0f);
+        CHECK(b.a == 0.2f);
+    }
+
+    SECTION("Color - value multiplication") {
+        Color result = a * s;
+        CHECK(result.r == Approx(1.5f));
+        CHECK(result.g == Approx(3.0f));
+        CHECK(result.b == Approx(4.5f));
+        CHECK(result.a == Approx(0.15f));
+        CHECK(a.r == 1.0f);
+        CHECK(a.g == 2.0f);
+        CHECK(a.b == 3.0f);
+        CHECK(a.a == 0.1f);
+        CHECK(s == 1.5f);
+    }
+
+    SECTION("Color division") {
+        Color result = a / s;
+        CHECK(result.r == Approx(0.6f).epsilon(0.125f));
+        CHECK(result.g == Approx(1.3f).epsilon(0.125f));
+        CHECK(result.b == Approx(2.0f).epsilon(0.125f));
+        CHECK(result.a == Approx(0.06f).epsilon(0.125f));
+        CHECK(a.r == 1.0f);
+        CHECK(a.g == 2.0f);
+        CHECK(a.b == 3.0f);
+        CHECK(a.a == 0.1f);
+        CHECK(s == 1.5f);
+    }
+}

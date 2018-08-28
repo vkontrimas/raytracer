@@ -55,6 +55,31 @@ namespace raylib {
         return !(lhs == rhs);
     }
 
+    Color operator+(Color lhs, Color rhs) {
+        lhs += rhs;
+        return lhs;
+    }
+
+    Color operator-(Color lhs, Color rhs) {
+        lhs -= rhs;
+        return lhs;
+    }
+
+    Color operator*(Color lhs, Color rhs) {
+        lhs *= rhs;
+        return lhs;
+    }
+
+    Color operator*(Color lhs, float rhs) {
+        lhs *= rhs;
+        return lhs;
+    }
+
+    Color operator/(Color lhs, float rhs) {
+        lhs /= rhs;
+        return lhs;
+    }
+
     std::ostream &operator<<(std::ostream &stream, Color color) {
         std::stringstream string;
         string << std::showpoint << std::fixed << std::setprecision(3) <<
