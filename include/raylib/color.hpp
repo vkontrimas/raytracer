@@ -2,6 +2,8 @@
 #ifndef RAYTRACER_COLOR_HPP
 #define RAYTRACER_COLOR_HPP
 
+#include <ostream>
+
 namespace raylib {
     struct Color {
         float r;
@@ -22,6 +24,8 @@ namespace raylib {
 
     bool operator==(Color lhs, Color rhs);
     bool operator!=(Color lhs, Color rhs);
+
+    std::ostream &operator<<(std::ostream &stream, Color color);
 }
 
 #endif /*RAYTRACER_COLOR_HPP*/

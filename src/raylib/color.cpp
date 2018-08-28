@@ -1,4 +1,6 @@
 #include <raylib/color.hpp>
+#include <sstream>
+#include <iomanip>
 
 namespace raylib {
     Color::Color() : r(0.0f), g(0.0f), b(0.0f), a(1.0f) {}
@@ -51,5 +53,13 @@ namespace raylib {
 
     bool operator!=(Color lhs, Color rhs) {
         return !(lhs == rhs);
+    }
+
+    std::ostream &operator<<(std::ostream &stream, Color color) {
+        std::stringstream string;
+        string << std::showpoint << std::fixed << std::setprecision(3) <<
+            "(" << color.r << ", " << color.g << ", " << color.b << ", " << color.a << ")";
+        stream << string.str();
+        return stream;
     }
 }

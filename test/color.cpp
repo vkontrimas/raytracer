@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include <raylib/color.hpp>
+#include <sstream>
 
 using namespace raylib;
 
@@ -99,6 +100,31 @@ TEST_CASE("Color equality operators", "[color][operators]") {
             CHECK(b.b == 1.0f);
             CHECK(b.a == 0.2f);
         }
+    }
+}
+
+TEST_CASE("Color output stream operator", "[color][operators]") {
+    using Catch::Matchers::Equals;
+
+    std::stringstream output;
+    SECTION("0.0f") {
+        output << Color(0.0f, 0.0f, 0.0f, 0.0f);
+        REQUIRE_THAT(output.str(), Equals("(0.000, 0.000, 0.000, 0.000)"));
+    }
+
+    SECTION("1.0f") {
+        output << Color(1.0f, 1.0f, 1.0f, 1.0f);
+        REQUIRE_THAT(output.str(), Equals("(1.000, 1.000, 1.000, 1.000)"));
+    }
+
+    SECTION("0.5f") {
+        output << Color(0.5f, 0.5f, 0.5f, 0.5f);
+        REQUIRE_THAT(output.str(), Equals("(0.500, 0.500, 0.500, 0.500)"));
+    }
+
+    SECTION("Varied") {
+        output << Color(0.7f, 12.05f, 0.1f, 0.0f);
+        REQUIRE_THAT(output.str(), Equals("(0.700, 12.050, 0.100, 0.000)"));
     }
 }
 
