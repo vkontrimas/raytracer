@@ -10,7 +10,7 @@ namespace raylib {
     public:
         PixelOutOfBounds(int x, int y, int imageWidth, int imageHeight);
 
-        const char *what() const;
+        const char *what() const noexcept;
         Image::size_type pixelX() const { return m_pixelX; }
         Image::size_type pixelY() const { return m_pixelY; }
         Image::size_type imageWidth() const { return m_imageWidth; }

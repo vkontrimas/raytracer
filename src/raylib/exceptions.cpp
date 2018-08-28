@@ -10,7 +10,7 @@ namespace raylib {
             m_what = stream.str();
         }
 
-    const char *PixelOutOfBounds::what() const {
+    const char *PixelOutOfBounds::what() const noexcept {
         return m_what.c_str();
     }
 }
