@@ -9,7 +9,7 @@ endif()
 
 enable_testing()
 
-add_executable(testray main.cpp vec3.cpp)
+add_executable(testray main.cpp vec3.cpp color.cpp)
 target_compile_features(testray PRIVATE cxx_std_11)
 target_link_libraries(testray raylib Catch2)
 
