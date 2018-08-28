@@ -21,7 +21,10 @@ namespace raylib {
     }
 
     const Color &Image::pixelAt(size_type x, size_type y) const {
-        return pixelAt(x, y);
+        if (x < 0 || x >= m_width || y < 0 || y >= m_height) {
+            throw PixelOutOfBounds(x, y, m_width, m_height);
+        }
+        return m_pixels[getPixelIndex(x, y)];
     }
 
     Image::size_type Image::getPixelIndex(size_type x, size_type y) const {

@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include <raylib/image.hpp>
+#include <raylib/exceptions.hpp>
 #include <stdexcept>
 
 using namespace raylib;
@@ -20,3 +21,33 @@ TEST_CASE("Image initialization", "[image][init]") {
     }
 }
 
+TEST_CASE("Image pixel access", "[image]") {
+    Image image(100, 100);
+
+    SECTION("Read") {
+        Color sum;
+        for (int y = 0; y < image.height(); ++y) {
+            for (int x = 0; x < image.width(); ++x) {
+                sum += image.pixelAt(x, y);
+            }
+        }
+    }
+
+    SECTION("Write") {
+        Color red(1.0f, 0.0f, 0.0f);
+        for (int y = 0; y < image.height(); ++y) {
+            for (int x = 0; x < image.width(); ++x) {
+                image.pixelAt(x, y) = red;
+            }
+        }
+    }
+
+    SECTION("Out of bounds access") {
+        REQUIRE_THROWS_AS(image.pixelAt(-1, 0), PixelOutOfBounds);
+    }
+
+    SECTION("Const image out of bounds access") {
+        const Image &ref = image;
+        REQUIRE_THROWS_AS(ref.pixelAt(-1, 0), PixelOutOfBounds);
+    }
+}
