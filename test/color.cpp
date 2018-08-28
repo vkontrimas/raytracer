@@ -101,3 +101,63 @@ TEST_CASE("Color equality operators", "[color][operators]") {
         }
     }
 }
+
+TEST_CASE("Color assignment operators", "[color][operators]") {
+    Color a(1.0f, 2.0f, 3.0f, 0.1f);
+    Color b(2.0f, 4.0f, 6.0f, 0.2f);
+    float s = 1.5f;
+
+    SECTION("Addition") {
+        a += b;
+        CHECK(a.r == Approx(3.0f));
+        CHECK(a.g == Approx(6.0f));
+        CHECK(a.b == Approx(9.0f));
+        CHECK(a.a == Approx(0.3f));
+        CHECK(b.r == 2.0f);
+        CHECK(b.g == 4.0f);
+        CHECK(b.b == 6.0f);
+        CHECK(b.a == 0.2f);
+    }
+
+    SECTION("Subtraction") {
+        a -= b;
+        CHECK(a.r == Approx(-1.0f));
+        CHECK(a.g == Approx(-2.0f));
+        CHECK(a.b == Approx(-3.0f));
+        CHECK(a.a == Approx(-0.1f));
+        CHECK(b.r == 2.0f);
+        CHECK(b.g == 4.0f);
+        CHECK(b.b == 6.0f);
+        CHECK(b.a == 0.2f);
+    }
+
+    SECTION("Color - Color multiplication") {
+        a *= b;
+        CHECK(a.r == Approx(2.0f));
+        CHECK(a.g == Approx(8.0f));
+        CHECK(a.b == Approx(18.0f));
+        CHECK(a.a == Approx(0.02f));
+        CHECK(b.r == 2.0f);
+        CHECK(b.g == 4.0f);
+        CHECK(b.b == 6.0f);
+        CHECK(b.a == 0.2f);
+    }
+
+    SECTION("Color - value multiplication") {
+        a *= s;
+        CHECK(a.r == Approx(1.5f));
+        CHECK(a.g == Approx(3.0f));
+        CHECK(a.b == Approx(4.5f));
+        CHECK(a.a == Approx(0.15f));
+        CHECK(s == 1.5f);
+    }
+
+    SECTION("Color division") {
+        a /= s;
+        CHECK(a.r == Approx(0.6f).epsilon(0.125f));
+        CHECK(a.g == Approx(1.3f).epsilon(0.125f));
+        CHECK(a.b == Approx(2.0f).epsilon(0.125f));
+        CHECK(a.a == Approx(0.06f).epsilon(0.125f));
+        CHECK(s == 1.5f);
+    }
+}

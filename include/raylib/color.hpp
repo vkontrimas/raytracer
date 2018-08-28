@@ -12,6 +12,12 @@ namespace raylib {
         Color();
         Color(float num);
         Color(float r, float g, float b, float a = 1.0f); // NOTE: Should alpha be capped to the [0, 1] range?
+
+        Color &operator+=(Color other);
+        Color &operator-=(Color other); // NOTE: Do we allow colors to become negative? Update tests if not.
+        Color &operator*=(Color other);
+        Color &operator*=(float value);
+        Color &operator/=(float value);
     };
 
     bool operator==(Color lhs, Color rhs);
