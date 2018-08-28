@@ -10,6 +10,7 @@ TEST_CASE("Image initialization", "[image][init]") {
         Image image(1024, 1024);
         CHECK(image.width() == 1024);
         CHECK(image.height() == 1024);
+        CHECK(image.pixelCount() == 1048576);
     }
 
     SECTION("Invalid") {
