@@ -19,6 +19,11 @@ namespace raylib {
         size_type height() const { return m_height; }
         size_type pixelCount() const { return m_width * m_height; }
 
+        auto begin() { return m_pixels.begin(); }
+        auto end() { return m_pixels.end(); }
+        auto cbegin() const { return m_pixels.cbegin(); }
+        auto cend() const { return m_pixels.cend(); }
+
     private:
         size_type m_width;
         size_type m_height;
