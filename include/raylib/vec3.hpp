@@ -24,6 +24,8 @@ namespace raylib {
 
         float dot(Vec3 other);
         Vec3 cross(Vec3 other);
+
+        Vec3 normalized();
     };
 
     bool operator==(Vec3 lhs, Vec3 rhs);

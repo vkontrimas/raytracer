@@ -300,3 +300,32 @@ TEST_CASE("Vec3 cross product", "[vec3][math]") {
         REQUIRE(b == Vec3(0.139f, 0.839f, 0.524f));
     }
 }
+
+TEST_CASE("Vec3 normalization", "[vec3][math]") {
+    SECTION("Long vector") {
+        Vec3 a(100.0f);
+        Vec3 normalized = a.normalized();
+        CHECK(normalized.x == Approx(0.577350f).epsilon(0.001f));
+        CHECK(normalized.y == Approx(0.577350f).epsilon(0.001f));
+        CHECK(normalized.z == Approx(0.577350f).epsilon(0.001f));
+        CHECK(normalized.magnitude() == Approx(1.0f).epsilon(0.01f));
+    }
+
+    SECTION("Longer vector") {
+        Vec3 a(1211.0f, 241.0f, 24.0f);
+        Vec3 normalized = a.normalized();
+        CHECK(normalized.x == Approx(0.980581f).epsilon(0.001f));
+        CHECK(normalized.y == Approx(0.195144f).epsilon(0.001f));
+        CHECK(normalized.z == Approx(0.019433f).epsilon(0.001f));
+        CHECK(normalized.magnitude() == Approx(1.0f).epsilon(0.01f));
+    }
+
+    SECTION("Short vector") {
+        Vec3 a(0.248f, 0.853f, 0.124f);
+        Vec3 normalized = a.normalized();
+        CHECK(normalized.x == Approx(0.276497f).epsilon(0.001f));
+        CHECK(normalized.y == Approx(0.951018f).epsilon(0.001f));
+        CHECK(normalized.z == Approx(0.138248f).epsilon(0.001f));
+        CHECK(normalized.magnitude() == Approx(1.0f).epsilon(0.01f));
+    }
+}
