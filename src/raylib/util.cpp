@@ -4,7 +4,7 @@
 #include <limits>
 
 namespace raylib {
-    bool approx(float a, float b, float epsilon = 0.0001f) {
+    bool approx(float a, float b, float epsilon) {
         if (a == b) { return true; }
         else {
             float diff = std::abs(a - b);
