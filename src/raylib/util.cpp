@@ -5,7 +5,10 @@
 
 namespace raylib {
     bool approx(float a, float b, float epsilon = 0.0001f) {
-        float diff = std::abs(a - b);
-        return diff / std::fmin(std::abs(a) + std::abs(b), std::numeric_limits<float>::max()) <= epsilon;
+        if (a == b) { return true; }
+        else {
+            float diff = std::abs(a - b);
+            return diff / std::fmin(std::abs(a) + std::abs(b), std::numeric_limits<float>::max()) <= epsilon;
+        }
     }
 }
