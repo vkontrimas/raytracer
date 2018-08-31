@@ -1,6 +1,7 @@
 #include <catch2/catch.hpp>
 #include <raylib/vec3.hpp>
 #include <sstream>
+#include <vector>
 
 using namespace raylib;
 
@@ -329,3 +330,19 @@ TEST_CASE("Vec3 normalization", "[vec3][math]") {
         CHECK(normalized.magnitude() == Approx(1.0f).epsilon(0.01f));
     }
 }
+
+TEST_CASE("Vec3::approx()", "[vec3][math]") {
+    // Vec3::approx uses raylib::approx so we just want to test if 
+    // the Vec3 components are properly compared.
+    Vec3 a(1.0f, 2.0f, 3.0f);
+    CHECK(a.approx(Vec3(1.0001f, 1.9999f, 3.0001f)));
+    CHECK(a.approx(Vec3(1.0001f, 2.0f, 3.0f)));
+    CHECK(a.approx(Vec3(1.0f, 1.9999f, 3.0f)));
+    CHECK(a.approx(Vec3(1.0f, 2.0f, 3.0001f)));
+    CHECK_FALSE(a.approx(Vec3(1.9995f, 1.9995f, 3.9995f)));
+    CHECK_FALSE(a.approx(Vec3(1.0005f, 1.0005f, 3.0005f)));
+    CHECK_FALSE(a.approx(Vec3(1.95f, 2.0f, 3.0f)));
+    CHECK_FALSE(a.approx(Vec3(1.0f, 2.005f, 3.0f)));
+    CHECK_FALSE(a.approx(Vec3(1.0f, 2.0f, 3.005f)));
+}
+

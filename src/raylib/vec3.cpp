@@ -1,4 +1,5 @@
 #include <raylib/vec3.hpp>
+#include <raylib/util.hpp>
 #include <sstream>
 #include <iomanip>
 #include <cmath>
@@ -105,5 +106,13 @@ namespace raylib {
 
     Vec3 Vec3::normalized() {
         return (*this) / this->magnitude();
+    }
+
+    bool Vec3::approx(Vec3 other) {
+        return raylib::approx(x, other.x) && raylib::approx(y, other.y) && raylib::approx(z, other.z);
+    }
+
+    bool Vec3::approx(Vec3 other, float epsilon) {
+        return raylib::approx(x, other.x, epsilon) && raylib::approx(y, other.y, epsilon) && raylib::approx(z, other.z, epsilon);
     }
 }

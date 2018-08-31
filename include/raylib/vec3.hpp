@@ -26,6 +26,9 @@ namespace raylib {
         Vec3 cross(Vec3 other);
 
         Vec3 normalized();
+
+        bool approx(Vec3 other);
+        bool approx(Vec3 other, float epsilon);
     };
 
     bool operator==(Vec3 lhs, Vec3 rhs);
