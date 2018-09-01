@@ -2,6 +2,8 @@
 #ifndef RAYTRACER_RAY_HPP
 #define RAYTRACER_RAY_HPP
 
+#include <raylib/vec3.hpp>
+
 namespace raylib {
     struct Ray {
         Vec3 origin;

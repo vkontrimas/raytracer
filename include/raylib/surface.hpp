@@ -3,6 +3,7 @@
 #define RAYTRACER_SURFACE_HPP
 
 #include <raylib/hitinfo.hpp>
+#include <raylib/ray.hpp>
 
 namespace raylib {
     class Surface {
