@@ -8,7 +8,7 @@
 namespace raylib {
     class Sphere : public Surface {
     public:
-        Sphere(Vec3 position, float radius = 0.5f);
+        Sphere(Vec3 position, float radius = 1.0f);
 
         virtual HitInfo checkHit(Ray ray);
 
