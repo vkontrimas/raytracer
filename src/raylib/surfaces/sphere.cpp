@@ -1,5 +1,4 @@
 #include <raylib/surfaces/sphere.hpp>
-#include <iostream>
 
 namespace raylib {
     Sphere::Sphere(Vec3 position, float radius) : m_position(position), m_radius(radius) {}
