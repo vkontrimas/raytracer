@@ -14,7 +14,7 @@ namespace raylib {
     };
 
     inline std::ostream &operator<<(std::ostream &stream, Ray ray) {
-        stream << "[" << ray.origin << ", " << ray.direction << "]";
+        stream << "Ray(" << ray.origin << ", " << ray.direction << ")";
         return stream;
     }
 }
