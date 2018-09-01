@@ -4,6 +4,7 @@
 
 #include <raylib/surface.hpp>
 #include <raylib/vec3.hpp>
+#include <ostream>
 
 namespace raylib {
     class Sphere : public Surface {
@@ -22,6 +23,8 @@ namespace raylib {
         Vec3 m_position;
         float m_radius;
     };
+
+    std::ostream &operator<<(std::ostream &stream, Sphere sphere);
 }
 
 #endif /*RAYTRACER_SURFACES_SPHERE_HPP*/

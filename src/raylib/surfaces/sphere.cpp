@@ -6,4 +6,9 @@ namespace raylib {
     HitInfo Sphere::checkHit(Ray ray) {
         return { false };
     }
+
+    std::ostream &operator<<(std::ostream &stream, Sphere sphere) {
+        stream << "Sphere(" << sphere.position() << ", " << sphere.radius() << "r)";
+        return stream;
+    }
 }
