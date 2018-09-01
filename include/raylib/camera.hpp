@@ -14,6 +14,8 @@ namespace raylib {
         const Vec3 &position() const { return m_position; }
         const Vec3 &direction() const { return m_direction; }
 
+        void lookAt(Vec3 position);
+
     private:
         Vec3 m_position;
         Vec3 m_direction;
