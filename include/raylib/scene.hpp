@@ -15,7 +15,7 @@ namespace raylib {
             m_surfaces.push_back(std::make_unique<T>(std::forward<T>(surface)));
         }
 
-        HitInfo checkHit(Ray ray);
+        HitInfo checkHit(Ray ray) const;
 
     private:
         std::vector<std::unique_ptr<Surface>> m_surfaces;

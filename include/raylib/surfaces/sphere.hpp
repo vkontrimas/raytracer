@@ -11,7 +11,7 @@ namespace raylib {
     public:
         Sphere(Vec3 position, float radius = 1.0f);
 
-        virtual HitInfo checkHit(Ray ray);
+        virtual HitInfo checkHit(Ray ray) const;
 
         Vec3 &position() { return m_position; }
         const Vec3 &position() const { return m_position; }

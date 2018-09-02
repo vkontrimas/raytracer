@@ -2,7 +2,7 @@
 #include <iostream>
 
 namespace raylib {
-    HitInfo Scene::checkHit(Ray ray) {
+    HitInfo Scene::checkHit(Ray ray) const {
         HitInfo closestHit = {};
 
         for (auto &&surface : m_surfaces) {
