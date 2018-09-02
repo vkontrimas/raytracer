@@ -1,5 +1,6 @@
 #include <raylib/image.hpp>
 #include <raylib/surfaces/sphere.hpp>
+#include <raylib/scene.hpp>
 #include <vector>
 #include <iostream>
 #include "io.hpp"
@@ -10,10 +11,10 @@ int main() {
     Image image(256, 256);
     float cameraWorldUnit = 0.025f;
 
-    std::vector<Sphere> spheres {
-        Sphere(Vec3(0.0f, 0.0f, -10.0f)),
-        Sphere(Vec3(2.0f, 0.0f, -5.0f), 0.5f),
-    };
+    Scene scene;
+    scene.addSurface(Sphere(Vec3(1.0f, -0.5f, -5.0f), 0.5f));
+    scene.addSurface(Sphere(Vec3(0.0f, 0.0f, -10.0f)));
+    scene.addSurface(Sphere(Vec3(1.0f, 0.0f, -15.0f), 0.5f));
 
     Color backgroundColor(0.25f, 0.5f, 0.8f, 1.0f);
 
@@ -29,11 +30,10 @@ int main() {
 
             image.pixelAt(x, y) = backgroundColor;
 
-            for (auto &&sphere : spheres) {
-                HitInfo hit = sphere.checkHit(ray);
-                if (hit.hit) {
-                    image.pixelAt(x, y) = Color(1.0f, 0.0f, 0.0f);
-                }
+            HitInfo hit = scene.checkHit(ray);
+            if (hit) {
+                float distance = hit.position.magnitude();
+                image.pixelAt(x, y) = Color(distance * 0.05f);
             }
         }
     }
