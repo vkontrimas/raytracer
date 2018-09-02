@@ -17,7 +17,7 @@ TEST_CASE("Sphere initialization", "[surfaces][sphere][init]") {
     }
 }
 
-TEST_CASE("Sphere intersection", "[surfaces][shere][math][ray]") {
+TEST_CASE("Sphere intersection", "[surfaces][sphere][math][ray]") {
     SECTION("Axis aligned") {
         Sphere sphere(Vec3(0.0f, 0.0f, -10.0f), 1.0f);
         INFO(sphere);
