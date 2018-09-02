@@ -9,6 +9,8 @@ namespace raylib {
         bool hit = false;
         Vec3 position { 0.0f, 0.0f, 0.0f };
         Vec3 normal { 0.0f, 0.0f, 0.0f };
+
+        operator bool() { return hit; }
     };
 }
 #endif /*RAYTRACER_HITINFO_HPP*/
