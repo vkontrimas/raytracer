@@ -12,7 +12,7 @@ namespace raylib {
     public:
         template<class T>
         void addSurface(T &&surface) {
-            m_surfaces.push_back(std::make_unique<T>(std::forward<T>(surface)));
+            m_surfaces.emplace_back(new T(std::forward<T>(surface)));
         }
 
         HitInfo checkHit(Ray ray) const;
