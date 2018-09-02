@@ -6,9 +6,9 @@
 
 namespace raylib {
     struct HitInfo {
-        bool hit;
-        Vec3 position;
-        Vec3 normal;
+        bool hit = false;
+        Vec3 position { 0.0f, 0.0f, 0.0f };
+        Vec3 normal { 0.0f, 0.0f, 0.0f };
     };
 }
 #endif /*RAYTRACER_HITINFO_HPP*/
