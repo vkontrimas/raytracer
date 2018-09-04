@@ -34,6 +34,36 @@ namespace raylib {
         m44 = getElement(list, 15);
     }
 
+    Mat4 &Mat4::operator*=(float scalar) {
+        m11 *= scalar;
+        m12 *= scalar;
+        m13 *= scalar;
+        m14 *= scalar;
+        m21 *= scalar;
+        m22 *= scalar;
+        m23 *= scalar;
+        m24 *= scalar;
+        m31 *= scalar;
+        m32 *= scalar;
+        m33 *= scalar;
+        m34 *= scalar;
+        m41 *= scalar;
+        m42 *= scalar;
+        m43 *= scalar;
+        m44 *= scalar;
+        return *this;
+    }
+
+    Mat4 operator*(float scalar, Mat4 matrix) {
+        matrix *= scalar;
+        return matrix;
+    }
+    
+    Mat4 operator*(Mat4 matrix, float scalar) {
+        matrix *= scalar;
+        return matrix;
+    }
+
     bool operator==(Mat4 a, Mat4 b) {
         return a.m11 == b.m11 &&
                a.m12 == b.m12 &&
