@@ -1,4 +1,9 @@
-add_executable(ray main.cpp io.hpp io.cpp)
+add_executable(ray
+               main.cpp
+               io.hpp
+               io.cpp
+)
+
 target_compile_features(ray PRIVATE cxx_std_11)
 target_include_directories(ray PRIVATE "${CMAKE_SOURCE_DIR}/external/include")
 target_link_libraries(ray raylib)
