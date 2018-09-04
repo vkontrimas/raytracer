@@ -27,5 +27,8 @@ namespace raylib {
         Mat4(float diagonal);
         Mat4(std::initializer_list<float> initializer);
     };
+
+    bool operator==(Mat4 a, Mat4 b);
+    bool operator!=(Mat4 a, Mat4 b);
 }
 #endif /*RAYTRACER_MAT4_HPP*/

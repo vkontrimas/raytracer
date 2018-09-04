@@ -120,3 +120,43 @@ TEST_CASE("Mat4 initialization", "[mat4][init]") {
         }
     }
 }
+
+TEST_CASE("Comparison operators", "[mat4][operators]") {
+    Mat4 a = {
+        1.0f,   2.0f,   3.0f,   4.0f,
+        5.0f,   6.0f,   7.0f,   8.0f,
+        9.0f,   10.0f,  11.0f,  12.0f,
+        13.0f,  14.0f,  15.0f,  16.0f
+    };
+
+    Mat4 b(1.0f);
+
+    Mat4 c = {
+        1.0f,   2.0f,   3.0f,   4.0f,
+        5.0f,   6.0f,   7.0f,   8.0f,
+        9.0f,   10.0f,  11.0f,  12.0f,
+        13.0f,  14.0f,  15.0f,  16.0f
+    }; 
+
+    Mat4 d(1.0f);
+
+    SECTION("a == c") {
+        REQUIRE(a == c);
+        REQUIRE_FALSE(a != c);
+    }
+
+    SECTION("b == d") {
+        REQUIRE(b == d);
+        REQUIRE_FALSE(b != d);
+    }
+
+    SECTION("b != a") {
+        REQUIRE(b != a);
+        REQUIRE_FALSE(b == a);
+    }
+
+    SECTION("d != c") {
+        REQUIRE(d != c);
+        REQUIRE_FALSE(d == c);
+    }
+}
