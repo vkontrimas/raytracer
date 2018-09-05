@@ -35,5 +35,6 @@ namespace raylib {
     bool operator!=(Mat4 a, Mat4 b);
     Mat4 operator*(float scalar, Mat4 matrix);
     Mat4 operator*(Mat4 matrix, float scalar);
+    Mat4 operator*(Mat4 a, Mat4 b);
 }
 #endif /*RAYTRACER_MAT4_HPP*/

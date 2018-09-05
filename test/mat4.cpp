@@ -219,3 +219,58 @@ TEST_CASE("Scalar multiplication", "[mat4][operators][math]") {
         }
     }
 }
+
+TEST_CASE("Matrix multiplication", "[mat4][operators][math]") {
+    SECTION("Regular") {
+        Mat4 a = {
+            1.0f,   2.0f,   3.0f,   4.0f,
+            5.0f,   6.0f,   7.0f,   8.0f,
+            9.0f,   10.0f,  11.0f,  12.0f,
+            13.0f,  14.0f,  15.0f,  16.0f
+        };
+
+        Mat4 b = {
+            2.0f,   4.0f,   6.0f,   8.0f,
+            10.0f,  12.0f,  14.0f,  16.0f,
+            18.0f,  20.0f,  22.0f,  24.0f,
+            26.0f,  28.0f,  30.0f,  32.0f
+        };
+
+        Mat4 result = {
+            180.0f,  200.0f,  220.0f,   240.0f,
+            404.0f,  456.0f,  508.0f,   560.0f,
+            628.0f,  712.0f,  796.0f,   880.0f,
+            852.0f,  968.0f,  1084.0f,  1200.0f
+        };
+
+        SECTION("*=") {
+            a *= b;
+            REQUIRE(a == result);
+        }
+
+        SECTION("*") {
+            Mat4 r = a * b;
+            REQUIRE(r == result);
+        }
+    }
+
+    SECTION("By identity") {
+        Mat4 identity(1.0f);
+
+        Mat4 a = {
+            1.0f,   2.0f,   3.0f,   4.0f,
+            5.0f,   6.0f,   7.0f,   8.0f,
+            9.0f,   10.0f,  11.0f,  12.0f,
+            13.0f,  14.0f,  15.0f,  16.0f
+        };
+
+        Mat4 result = {
+            1.0f,   2.0f,   3.0f,   4.0f,
+            5.0f,   6.0f,   7.0f,   8.0f,
+            9.0f,   10.0f,  11.0f,  12.0f,
+            13.0f,  14.0f,  15.0f,  16.0f
+        };
+
+        REQUIRE((a * identity) == result);
+    }
+}

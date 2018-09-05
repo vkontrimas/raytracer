@@ -34,6 +34,49 @@ namespace raylib {
         m44 = getElement(list, 15);
     }
 
+
+#define VEC4DOT(a0, a1, a2, a3, b0, b1, b2, b3) (a0 * b0 + a1 * b1 + a2 * b2 + a3 * b3)
+
+    Mat4 &Mat4::operator*=(Mat4 b) {
+        /*
+         * a = this
+         * b = other
+         *
+         *                    b11 b12 b13 b14
+         *                    b21 b22 b23 b24
+         *                    b31 b32 b33 b34
+         *                    b41 b42 b43 b44
+         *
+         *  a11 a12 a13 a14   
+         *  a21 a22 a23 a24
+         *  a31 a32 a33 a34
+         *  a41 a42 a43 a44
+         */
+        // NOTE: Slower than ideal.
+        m11 = VEC4DOT(m11, m12, m13, m13, b.m11, b.m21, b.m31, b.m41);
+        m12 = VEC4DOT(m11, m12, m13, m13, b.m12, b.m22, b.m32, b.m42);
+        m13 = VEC4DOT(m11, m12, m13, m13, b.m13, b.m23, b.m33, b.m43);
+        m14 = VEC4DOT(m11, m12, m13, m13, b.m14, b.m24, b.m34, b.m44);
+        m21 = VEC4DOT(m21, m22, m23, m23, b.m11, b.m21, b.m31, b.m41);
+        m22 = VEC4DOT(m21, m22, m23, m23, b.m12, b.m22, b.m32, b.m42);
+        m23 = VEC4DOT(m21, m22, m23, m23, b.m13, b.m23, b.m33, b.m43);
+        m24 = VEC4DOT(m21, m22, m23, m23, b.m14, b.m24, b.m34, b.m44);
+        m31 = VEC4DOT(m31, m32, m33, m33, b.m11, b.m21, b.m31, b.m41);
+        m32 = VEC4DOT(m31, m32, m33, m33, b.m12, b.m22, b.m32, b.m42);
+        m33 = VEC4DOT(m31, m32, m33, m33, b.m13, b.m23, b.m33, b.m43);
+        m34 = VEC4DOT(m31, m32, m33, m33, b.m14, b.m24, b.m34, b.m44);
+        m41 = VEC4DOT(m41, m42, m43, m43, b.m11, b.m21, b.m31, b.m41);
+        m42 = VEC4DOT(m41, m42, m43, m43, b.m12, b.m22, b.m32, b.m42);
+        m43 = VEC4DOT(m41, m42, m43, m43, b.m13, b.m23, b.m33, b.m43);
+        m44 = VEC4DOT(m41, m42, m43, m43, b.m14, b.m24, b.m34, b.m44);
+        return *this;
+    }
+
+    Mat4 operator*(Mat4 a, Mat4 b) {
+        a *= b;
+        return a;
+    }
+
     Mat4 &Mat4::operator*=(float scalar) {
         m11 *= scalar;
         m12 *= scalar;
