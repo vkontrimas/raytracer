@@ -8,6 +8,11 @@
 
 // TODO: Add a Mat4::inverse() function.
 namespace raylib {
+    static const float pi = 3.141592653589793f;
+    static const float tau = 2 * pi;
+    static const float pi2 = pi / 2.0f;
+    static const float pi4 = pi / 4.0f;
+
     struct Mat4 {
         float m11 = 0.0f;
         float m12 = 0.0f;
