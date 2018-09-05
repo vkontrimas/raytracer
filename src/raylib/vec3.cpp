@@ -105,6 +105,7 @@ namespace raylib {
     }
 
     Vec3 Vec3::normalized() {
+        if (x == 0.0f && y == 0.0f && z == 0.0f) { return Vec3(); }
         return (*this) / this->magnitude();
     }
 
