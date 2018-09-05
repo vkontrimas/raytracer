@@ -169,6 +169,10 @@ namespace raylib {
         return result;
     }
 
+    Vec3 Mat4::getTranslation() const {
+        return Vec3(m14, m24, m34);
+    }
+
     std::ostream &operator<<(std::ostream &stream, Mat4 matrix) {
         std::stringstream string_stream;
         string_stream << std::showpoint << std::fixed << std::setprecision(3) << 

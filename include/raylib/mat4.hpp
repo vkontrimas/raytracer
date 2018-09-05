@@ -35,6 +35,8 @@ namespace raylib {
 
         Mat4 transpose() const;
 
+        Vec3 getTranslation() const;
+
         static Mat4 translate(Vec3 translation);
         static Mat4 rotateX(float angle);
         static Mat4 rotateY(float angle);
