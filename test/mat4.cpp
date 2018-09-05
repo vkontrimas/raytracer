@@ -1,6 +1,7 @@
 #include <catch2/catch.hpp>
 #include <raylib/mat4.hpp>
 #include <sstream>
+#include <cmath>
 
 using namespace raylib;
 
@@ -343,4 +344,52 @@ TEST_CASE("Matrices", "[mat4][math]") {
         };
         REQUIRE(Mat4::translate(Vec3(2.0f, 4.0f, 6.0f)) == result);
     }
+
+    SECTION("Rotate X") {
+        float cos = std::cos(pi4);
+        float sin = std::sin(pi4);
+
+        Mat4 result = {
+            1.0f,  0.0f,  0.0f,  0.0f,
+            0.0f,  cos,   sin,   0.0f,
+            0.0f,  -sin,  cos,   0.0f,
+            0.0f,  0.0f,  0.0f,  1.0f
+        };
+
+        REQUIRE(Mat4::rotateX(pi4) == result);
+    }
+
+    SECTION("Rotate Y") {
+        float cos = std::cos(pi4);
+        float sin = std::sin(pi4);
+
+        Mat4 result = {
+            cos,   0.0f,  -sin,  0.0f,
+            0.0f,  1.0f,  0.0f,  0.0f,
+            sin,   0.0f,  cos,   0.0f,
+            0.0f,  0.0f,  0.0f,  1.0f
+        };
+
+        REQUIRE(Mat4::rotateY(pi4) == result);
+    }
+
+    SECTION("Rotate Z") {
+        float cos = std::cos(pi4);
+        float sin = std::sin(pi4);
+
+        Mat4 result = {
+            cos,   sin,   0.0f,  0.0f,
+            -sin,  cos,   0.0f,  0.0f,
+            0.0f,  0.0f,  1.0f,  0.0f,
+            0.0f,  0.0f,  0.0f,  1.0f
+        };
+
+        REQUIRE(Mat4::rotateZ(pi4) == result);
+    }
+}
+
+TEST_CASE("Matrix getTranslation", "[mat4]") {
+    Vec3 vector(2.0f, 4.0f, 6.0f);
+    Mat4 matrix = Mat4::translate(vector);
+    REQUIRE(matrix.getTranslation() == vector);
 }
