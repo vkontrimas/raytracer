@@ -332,3 +332,15 @@ TEST_CASE("Matrix transpose", "[mat4][math]") {
         REQUIRE(identity.transpose() == identity);
     }
 }
+
+TEST_CASE("Matrices", "[mat4][math]") {
+    SECTION("Translation") {
+        Mat4 result = {
+            1.0f, 0.0f, 0.0f, 2.0f,
+            0.0f, 1.0f, 0.0f, 4.0f,
+            0.0f, 0.0f, 1.0f, 6.0f,
+            0.0f, 0.0f, 0.0f, 1.0f
+        };
+        REQUIRE(Mat4::translate(Vec3(2.0f, 4.0f, 6.0f)) == result);
+    }
+}

@@ -2,6 +2,7 @@
 #ifndef RAYTRACER_MAT4_HPP
 #define RAYTRACER_MAT4_HPP
 
+#include <raylib/vec3.hpp>
 #include <initializer_list>
 #include <ostream>
 
@@ -33,6 +34,8 @@ namespace raylib {
         Mat4 &operator*=(float scalar);
 
         Mat4 transpose() const;
+
+        static Mat4 translate(Vec3 translation);
     };
 
     bool operator==(Mat4 a, Mat4 b);

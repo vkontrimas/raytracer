@@ -156,4 +156,12 @@ namespace raylib {
         stream << string_stream.str();
         return stream;
     }
+
+    Mat4 Mat4::translate(Vec3 translation) {
+        Mat4 result(1.0f);
+        result.m14 = translation.x;
+        result.m24 = translation.y;
+        result.m34 = translation.z;
+        return result;
+    }
 }
