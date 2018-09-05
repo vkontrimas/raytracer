@@ -192,7 +192,7 @@ namespace raylib {
         return result;
     }
 
-    Mat4 rotateX(float theta) {
+    Mat4 Mat4::rotateX(float theta) {
         Mat4 rotation(1.0f);
         rotation.m22 = std::cos(theta);
         rotation.m23 = std::sin(theta);
@@ -201,7 +201,7 @@ namespace raylib {
         return rotation;
     }
 
-    Mat4 rotateY(float theta) {
+    Mat4 Mat4::rotateY(float theta) {
         Mat4 rotation(1.0f);
         rotation.m11 = std::cos(theta);
         rotation.m13 = -std::sin(theta);
@@ -210,7 +210,7 @@ namespace raylib {
         return rotation;
     }
 
-    Mat4 rotateZ(float theta) {
+    Mat4 Mat4::rotateZ(float theta) {
         Mat4 rotation(1.0f);
         rotation.m11 = std::cos(theta);
         rotation.m12 = std::sin(theta);
@@ -219,7 +219,7 @@ namespace raylib {
         return rotation;
     }
 
-    Mat4 rotation(float x, float y, float z) {
+    Mat4 Mat4::rotation(float x, float y, float z) {
         return rotateX(x) * rotateY(y) * rotateZ(z);
     }
 }
