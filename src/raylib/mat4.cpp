@@ -136,6 +136,16 @@ namespace raylib {
         return !(a == b);
     }
 
+    Mat4 Mat4::transpose() const {
+        Mat4 result = {
+            m11, m21, m31, m41,
+            m12, m22, m32, m42,
+            m13, m23, m33, m43,
+            m14, m24, m34, m44
+        };
+        return result;
+    }
+
     std::ostream &operator<<(std::ostream &stream, Mat4 matrix) {
         std::stringstream string_stream;
         string_stream << std::showpoint << std::fixed << std::setprecision(3) << 

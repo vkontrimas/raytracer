@@ -5,6 +5,7 @@
 #include <initializer_list>
 #include <ostream>
 
+// TODO: Add a Mat4::inverse() function.
 namespace raylib {
     struct Mat4 {
         float m11 = 0.0f;
@@ -30,6 +31,8 @@ namespace raylib {
 
         Mat4 &operator*=(Mat4 other);
         Mat4 &operator*=(float scalar);
+
+        Mat4 transpose() const;
     };
 
     bool operator==(Mat4 a, Mat4 b);

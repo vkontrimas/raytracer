@@ -307,3 +307,28 @@ TEST_CASE("Matrix multiplication", "[mat4][operators][math]") {
         REQUIRE((a * identity) == result);
     }
 }
+
+TEST_CASE("Matrix transpose", "[mat4][math]") {
+    SECTION("Regular") {
+        Mat4 a = {
+            1.0f,   2.0f,   3.0f,   4.0f,
+            5.0f,   6.0f,   7.0f,   8.0f,
+            9.0f,   10.0f,  11.0f,  12.0f,
+            13.0f,  14.0f,  15.0f,  16.0f
+        };
+
+        Mat4 aT = {
+            1.0f,  5.0f,  9.0f,   13.0f,
+            2.0f,  6.0f,  10.0f,  14.0f,
+            3.0f,  7.0f,  11.0f,  15.0f,
+            4.0f,  8.0f,  12.0f,  16.0f
+        };
+
+        REQUIRE(a.transpose() == aT);
+    }
+
+    SECTION("Identity") {
+        Mat4 identity(1.0f);
+        REQUIRE(identity.transpose() == identity);
+    }
+}
