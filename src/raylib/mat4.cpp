@@ -37,7 +37,7 @@ namespace raylib {
     }
 
 
-#define VEC4DOT(a0, a1, a2, a3, b0, b1, b2, b3) (a0 * b0 + a1 * b1 + a2 * b2 + a3 * b3)
+#define VEC4DOT(a0, a1, a2, a3, b0, b1, b2, b3) ((a0 * b0) + (a1 * b1) + (a2 * b2) + (a3 * b3))
 
     Mat4 &Mat4::operator*=(Mat4 b) {
         /*
@@ -55,22 +55,26 @@ namespace raylib {
          *  a41 a42 a43 a44
          */
         // NOTE: Slower than ideal.
-        m11 = VEC4DOT(m11, m12, m13, m13, b.m11, b.m21, b.m31, b.m41);
-        m12 = VEC4DOT(m11, m12, m13, m13, b.m12, b.m22, b.m32, b.m42);
-        m13 = VEC4DOT(m11, m12, m13, m13, b.m13, b.m23, b.m33, b.m43);
-        m14 = VEC4DOT(m11, m12, m13, m13, b.m14, b.m24, b.m34, b.m44);
-        m21 = VEC4DOT(m21, m22, m23, m23, b.m11, b.m21, b.m31, b.m41);
-        m22 = VEC4DOT(m21, m22, m23, m23, b.m12, b.m22, b.m32, b.m42);
-        m23 = VEC4DOT(m21, m22, m23, m23, b.m13, b.m23, b.m33, b.m43);
-        m24 = VEC4DOT(m21, m22, m23, m23, b.m14, b.m24, b.m34, b.m44);
-        m31 = VEC4DOT(m31, m32, m33, m33, b.m11, b.m21, b.m31, b.m41);
-        m32 = VEC4DOT(m31, m32, m33, m33, b.m12, b.m22, b.m32, b.m42);
-        m33 = VEC4DOT(m31, m32, m33, m33, b.m13, b.m23, b.m33, b.m43);
-        m34 = VEC4DOT(m31, m32, m33, m33, b.m14, b.m24, b.m34, b.m44);
-        m41 = VEC4DOT(m41, m42, m43, m43, b.m11, b.m21, b.m31, b.m41);
-        m42 = VEC4DOT(m41, m42, m43, m43, b.m12, b.m22, b.m32, b.m42);
-        m43 = VEC4DOT(m41, m42, m43, m43, b.m13, b.m23, b.m33, b.m43);
-        m44 = VEC4DOT(m41, m42, m43, m43, b.m14, b.m24, b.m34, b.m44);
+        float r11 = VEC4DOT(m11, m12, m13, m14, b.m11, b.m21, b.m31, b.m41);
+        float r12 = VEC4DOT(m11, m12, m13, m14, b.m12, b.m22, b.m32, b.m42);
+        float r13 = VEC4DOT(m11, m12, m13, m14, b.m13, b.m23, b.m33, b.m43);
+        float r14 = VEC4DOT(m11, m12, m13, m14, b.m14, b.m24, b.m34, b.m44);
+        float r21 = VEC4DOT(m21, m22, m23, m24, b.m11, b.m21, b.m31, b.m41);
+        float r22 = VEC4DOT(m21, m22, m23, m24, b.m12, b.m22, b.m32, b.m42);
+        float r23 = VEC4DOT(m21, m22, m23, m24, b.m13, b.m23, b.m33, b.m43);
+        float r24 = VEC4DOT(m21, m22, m23, m24, b.m14, b.m24, b.m34, b.m44);
+        float r31 = VEC4DOT(m31, m32, m33, m34, b.m11, b.m21, b.m31, b.m41);
+        float r32 = VEC4DOT(m31, m32, m33, m34, b.m12, b.m22, b.m32, b.m42);
+        float r33 = VEC4DOT(m31, m32, m33, m34, b.m13, b.m23, b.m33, b.m43);
+        float r34 = VEC4DOT(m31, m32, m33, m34, b.m14, b.m24, b.m34, b.m44);
+        float r41 = VEC4DOT(m41, m42, m43, m44, b.m11, b.m21, b.m31, b.m41);
+        float r42 = VEC4DOT(m41, m42, m43, m44, b.m12, b.m22, b.m32, b.m42);
+        float r43 = VEC4DOT(m41, m42, m43, m44, b.m13, b.m23, b.m33, b.m43);
+        float r44 = VEC4DOT(m41, m42, m43, m44, b.m14, b.m24, b.m34, b.m44);
+        m11 = r11; m12 = r12; m13 = r13; m14 = r14;
+        m21 = r21; m22 = r22; m23 = r23; m24 = r24;
+        m31 = r31; m32 = r32; m33 = r33; m34 = r34;
+        m41 = r41; m42 = r42; m43 = r43; m44 = r44;
         return *this;
     }
 
