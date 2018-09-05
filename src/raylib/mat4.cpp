@@ -100,9 +100,9 @@ namespace raylib {
          *  a41 a42 a43 a44
          */
         Vec3 vec;
-        vec.x = VEC4DOT(m11, m12, m13, m14, b.x, b.y, b.z, 1.0f);
-        vec.y = VEC4DOT(m21, m22, m23, m24, b.x, b.y, b.z, 1.0f);
-        vec.z = VEC4DOT(m31, m32, m33, m34, b.x, b.y, b.z, 1.0f);
+        vec.x = VEC4DOT(a.m11, a.m12, a.m13, a.m14, b.x, b.y, b.z, 1.0f);
+        vec.y = VEC4DOT(a.m21, a.m22, a.m23, a.m24, b.x, b.y, b.z, 1.0f);
+        vec.z = VEC4DOT(a.m31, a.m32, a.m33, a.m34, b.x, b.y, b.z, 1.0f);
         return vec;
     }
 
