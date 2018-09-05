@@ -36,6 +36,10 @@ namespace raylib {
         Mat4 transpose() const;
 
         static Mat4 translate(Vec3 translation);
+        static Mat4 rotateX(float angle);
+        static Mat4 rotateY(float angle);
+        static Mat4 rotateZ(float angle);
+        static Mat4 rotation(float x, float y, float z);
     };
 
     bool operator==(Mat4 a, Mat4 b);

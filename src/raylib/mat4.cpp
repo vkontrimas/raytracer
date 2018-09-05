@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 
 namespace {
     float getElement(const std::initializer_list<float> &list, int index) {
@@ -163,5 +164,36 @@ namespace raylib {
         result.m24 = translation.y;
         result.m34 = translation.z;
         return result;
+    }
+
+    Mat4 rotateX(float theta) {
+        Mat4 rotation(1.0f);
+        rotation.m22 = std::cos(theta);
+        rotation.m23 = std::sin(theta);
+        rotation.m32 = -std::sin(theta);
+        rotation.m33 = std::cos(theta);
+        return rotation;
+    }
+
+    Mat4 rotateY(float theta) {
+        Mat4 rotation(1.0f);
+        rotation.m11 = std::cos(theta);
+        rotation.m13 = -std::sin(theta);
+        rotation.m31 = std::sin(theta);
+        rotation.m33 = std::cos(theta);
+        return rotation;
+    }
+
+    Mat4 rotateZ(float theta) {
+        Mat4 rotation(1.0f);
+        rotation.m11 = std::cos(theta);
+        rotation.m12 = std::sin(theta);
+        rotation.m21 = -std::sin(theta);
+        rotation.m22 = std::cos(theta);
+        return rotation;
+    }
+
+    Mat4 rotation(float x, float y, float z) {
+        return rotateX(x) * rotateY(y) * rotateZ(z);
     }
 }
