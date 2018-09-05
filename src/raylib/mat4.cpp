@@ -84,6 +84,28 @@ namespace raylib {
         return a;
     }
 
+    Vec3 operator*(Mat4 a, Vec3 b) {
+        /*
+         * a = this
+         * b = vector4
+         *
+         *                    bX
+         *                    bY
+         *                    bZ
+         *                    bW
+         *
+         *  a11 a12 a13 a14   
+         *  a21 a22 a23 a24
+         *  a31 a32 a33 a34
+         *  a41 a42 a43 a44
+         */
+        Vec3 vec;
+        vec.x = VEC4DOT(m11, m12, m13, m14, b.x, b.y, b.z, 1.0f);
+        vec.y = VEC4DOT(m21, m22, m23, m24, b.x, b.y, b.z, 1.0f);
+        vec.z = VEC4DOT(m31, m32, m33, m34, b.x, b.y, b.z, 1.0f);
+        return vec;
+    }
+
     Mat4 &Mat4::operator*=(float scalar) {
         m11 *= scalar;
         m12 *= scalar;
