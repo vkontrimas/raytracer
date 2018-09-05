@@ -329,6 +329,14 @@ TEST_CASE("Vec3 normalization", "[vec3][math]") {
         CHECK(normalized.z == Approx(0.138248f).epsilon(0.001f));
         CHECK(normalized.magnitude() == Approx(1.0f).epsilon(0.01f));
     }
+
+    SECTION("Zero") {
+        Vec3 a;
+        Vec3 normalized = a.normalized();
+        CHECK(normalized.x == 0.0f);
+        CHECK(normalized.y == 0.0f);
+        CHECK(normalized.z == 0.0f);
+    }
 }
 
 TEST_CASE("Vec3::approx()", "[vec3][math]") {
