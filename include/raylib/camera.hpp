@@ -13,16 +13,34 @@ namespace raylib {
         Vec3 getPosition() const;
         void setPosition(Vec3 position);
 
-        Vec3 &direction() { return m_direction; }
         float &fov() { return m_fov; }
-        const Vec3 &direction() const { return m_direction; }
         const float &fov() const { return m_fov; }
 
+        const Mat4 &getTransform() const { return m_transform; }
+
+        // TODO: Cache in the future.
+        Vec3 forward() const { 
+            Mat4 rs = m_transform;
+            rs.m14 = 0.0f;
+            rs.m24 = 0.0f;
+            rs.m34 = 0.0f;
+            return rs * Vec3(0.0f, 0.0f, -1.0f);
+        }
+
+        // TODO: Cache in the future.
+        Vec3 up() const { 
+            Mat4 rs = m_transform;
+            rs.m14 = 0.0f;
+            rs.m24 = 0.0f;
+            rs.m34 = 0.0f;
+            return rs * Vec3(0.0f, 1.0f, 0.0f);
+        }
+
+        void lookTowards(Vec3 direction);
         void lookAt(Vec3 position);
 
     private:
         Mat4 m_transform;
-        Vec3 m_direction;
         float m_fov;
     };
 }

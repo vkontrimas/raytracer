@@ -1,8 +1,10 @@
 #include <raylib/camera.hpp>
+#include <cmath>
 
 namespace raylib {
-    Camera::Camera(Vec3 position, Vec3 direction, float fov) : m_direction(direction), m_fov(fov) {
+    Camera::Camera(Vec3 position, Vec3 direction, float fov) : m_fov(fov) {
         m_transform = Mat4::translate(position);
+        lookTowards(direction);
     }
 
     Vec3 Camera::getPosition() const {
@@ -16,6 +18,17 @@ namespace raylib {
     }
 
     void Camera::lookAt(Vec3 targetPosition) {
-        m_direction = (targetPosition - getPosition()).normalized();
+        lookTowards((targetPosition - m_transform.getTranslation()).normalized());
+    }
+
+    void Camera::lookTowards(Vec3 targetDirection) {
+        Vec3 direction = targetDirection.normalized();
+
+        Vec3 horizontalDirection = Vec3(direction.x, 0.0f, direction.z).normalized();
+        float angleY = std::atan2(direction.x, -direction.z);
+        float angleX = std::acos(horizontalDirection.dot(direction));
+
+        Vec3 translation = m_transform.getTranslation();
+        m_transform = Mat4::rotateX(angleX) * Mat4::rotateY(angleY) * Mat4::translate(translation);
     }
 }
