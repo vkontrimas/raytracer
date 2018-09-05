@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include <raylib/mat4.hpp>
+#include <sstream>
 
 using namespace raylib;
 
@@ -118,6 +119,38 @@ TEST_CASE("Mat4 initialization", "[mat4][init]") {
                 REQUIRE_THROWS_AS(lambdaHack(), std::invalid_argument);
             }
         }
+    }
+}
+
+TEST_CASE("Stream insertion operator", "[mat4][operators]") {
+    using Catch::Matchers::Equals;
+
+    std::stringstream stream;
+
+    SECTION("A") {
+        Mat4 matrix = {
+            1.0f,   2.0f,   3.0f,   4.0f,
+            5.0f,   6.0f,   7.0f,   8.0f,
+            9.0f,   10.0f,  11.0f,  12.0f,
+            13.0f,  14.0f,  15.0f,  16.0f
+        };
+
+        stream << matrix;
+        REQUIRE_THAT(stream.str(), 
+        Equals("Mat4[m1X: 1.000, 2.000, 3.000, 4.000 | m2X: 5.000, 6.000, 7.000, 8.000 | m3X: 9.000, 10.000, 11.000, 12.000 | m4X: 13.000, 14.000, 15.000, 16.000]"));
+    }
+
+    SECTION("B") {
+        Mat4 matrix = {
+            2.0f,   4.0f,   6.0f,   8.0f,
+            10.0f,  12.0f,  14.0f,  16.0f,
+            18.0f,  20.0f,  22.0f,  24.0f,
+            26.0f,  28.0f,  30.0f,  32.0f
+        };
+
+        stream << matrix;
+        REQUIRE_THAT(stream.str(), 
+        Equals("Mat4[m1X: 2.000, 4.000, 6.000, 8.000 | m2X: 10.000, 12.000, 14.000, 16.000 | m3X: 18.000, 20.000, 22.000, 24.000 | m4X: 26.000, 28.000, 30.000, 32.000]"));
     }
 }
 

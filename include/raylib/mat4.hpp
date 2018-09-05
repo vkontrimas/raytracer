@@ -3,6 +3,7 @@
 #define RAYTRACER_MAT4_HPP
 
 #include <initializer_list>
+#include <ostream>
 
 namespace raylib {
     struct Mat4 {
@@ -36,5 +37,7 @@ namespace raylib {
     Mat4 operator*(float scalar, Mat4 matrix);
     Mat4 operator*(Mat4 matrix, float scalar);
     Mat4 operator*(Mat4 a, Mat4 b);
+
+    std::ostream &operator<<(std::ostream &stream, Mat4 matrix);
 }
 #endif /*RAYTRACER_MAT4_HPP*/

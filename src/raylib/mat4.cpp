@@ -1,5 +1,7 @@
 #include <raylib/mat4.hpp>
 #include <stdexcept>
+#include <sstream>
+#include <iomanip>
 
 namespace {
     float getElement(const std::initializer_list<float> &list, int index) {
@@ -128,5 +130,16 @@ namespace raylib {
 
     bool operator!=(Mat4 a, Mat4 b) {
         return !(a == b);
+    }
+
+    std::ostream &operator<<(std::ostream &stream, Mat4 matrix) {
+        std::stringstream string_stream;
+        string_stream << std::showpoint << std::fixed << std::setprecision(3) << 
+            "Mat4[m1X: " << matrix.m11 << ", " << matrix.m12 << ", " << matrix.m13 << ", " << matrix.m14 <<
+            " | m2X: " << matrix.m21 << ", " << matrix.m22 << ", " << matrix.m23 << ", " << matrix.m24 <<
+            " | m3X: " << matrix.m31 << ", " << matrix.m32 << ", " << matrix.m33 << ", " << matrix.m34 <<
+            " | m4X: " << matrix.m41 << ", " << matrix.m42 << ", " << matrix.m43 << ", " << matrix.m44 << "]";
+        stream << string_stream.str();
+        return stream;
     }
 }
