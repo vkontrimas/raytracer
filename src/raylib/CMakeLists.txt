@@ -9,6 +9,7 @@ add_library(raylib STATIC
             scene.cpp
             mat4.cpp
             materials/diffuse.cpp
+            materials/metallic.cpp
 )
 
 target_compile_features(raylib PRIVATE cxx_std_11)
