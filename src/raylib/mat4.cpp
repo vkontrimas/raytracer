@@ -219,6 +219,24 @@ namespace raylib {
         return rotation;
     }
 
+    Mat4 Mat4::rotate(Vec3 axis, float angle) {
+        // TODO: Write tests.
+        float cos = std::cos(angle);
+        float oneMinusCos = 1.0f - cos;
+        float sin = std::sin(angle);
+        Mat4 rotation(1.0f);
+        rotation.m11 = axis.x * axis.x * oneMinusCos + cos;
+        rotation.m12 = axis.x * axis.y * oneMinusCos + axis.z * sin;
+        rotation.m13 = axis.x * axis.z * oneMinusCos - axis.y * sin;
+        rotation.m21 = axis.x * axis.y * oneMinusCos - axis.z * sin;
+        rotation.m22 = axis.y * axis.y * oneMinusCos + cos;
+        rotation.m23 = axis.y * axis.z * oneMinusCos + axis.x * sin;
+        rotation.m31 = axis.x * axis.z * oneMinusCos + axis.y * sin;
+        rotation.m32 = axis.y * axis.z * oneMinusCos - axis.x * sin;
+        rotation.m33 = axis.z * axis.z * oneMinusCos + cos;
+        return rotation;
+    }
+
     Mat4 Mat4::rotation(float x, float y, float z) {
         return rotateX(x) * rotateY(y) * rotateZ(z);
     }

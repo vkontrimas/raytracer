@@ -47,6 +47,7 @@ namespace raylib {
         static Mat4 rotateY(float angle);
         static Mat4 rotateZ(float angle);
         static Mat4 rotation(float x, float y, float z);
+        static Mat4 rotate(Vec3 axis, float angle);
     };
 
     bool operator==(Mat4 a, Mat4 b);
