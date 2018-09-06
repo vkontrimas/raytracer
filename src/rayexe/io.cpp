@@ -1,6 +1,7 @@
 #include "io.hpp"
 #include <vector>
 #include <algorithm>
+#include <ctime>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
@@ -26,5 +27,14 @@ namespace rayexe {
             byteIndex += 3;
         }
         stbi_write_png(path.c_str(), image.width(), image.height(), 3, imageData.data(), image.width() * 3);
+    }
+
+    void writePNGTimestamped(const raylib::Image &image) {
+        std::time_t time = std::time(nullptr);
+
+        char cstr[2048];
+        std::strftime(cstr, sizeof(cstr), "%F_%H-%M-%S.png", std::localtime(&time));
+
+        writePNG(std::string(cstr), image);
     }
 }
