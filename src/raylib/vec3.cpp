@@ -88,32 +88,32 @@ namespace raylib {
         return stream;
     }
 
-    float Vec3::sqrMagnitude() {
+    float Vec3::sqrMagnitude() const {
         return x * x + y * y + z * z;
     }
 
-    float Vec3::magnitude() {
+    float Vec3::magnitude() const {
         return std::sqrt(x * x + y * y + z * z);
     }
 
-    float Vec3::dot(Vec3 other) {
+    float Vec3::dot(Vec3 other) const {
         return x * other.x + y * other.y + z * other.z;
     }
 
-    Vec3 Vec3::cross(Vec3 other) {
+    Vec3 Vec3::cross(Vec3 other) const {
         return Vec3(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x);
     }
 
-    Vec3 Vec3::normalized() {
+    Vec3 Vec3::normalized() const {
         if (x == 0.0f && y == 0.0f && z == 0.0f) { return Vec3(); }
         return (*this) / this->magnitude();
     }
 
-    bool Vec3::approx(Vec3 other) {
+    bool Vec3::approx(Vec3 other) const {
         return raylib::approx(x, other.x) && raylib::approx(y, other.y) && raylib::approx(z, other.z);
     }
 
-    bool Vec3::approx(Vec3 other, float epsilon) {
+    bool Vec3::approx(Vec3 other, float epsilon) const {
         return raylib::approx(x, other.x, epsilon) && raylib::approx(y, other.y, epsilon) && raylib::approx(z, other.z, epsilon);
     }
 }

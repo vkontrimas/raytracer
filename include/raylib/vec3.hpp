@@ -19,16 +19,16 @@ namespace raylib {
         Vec3 operator+();
         Vec3 operator-();
 
-        float sqrMagnitude();
-        float magnitude();
+        float sqrMagnitude() const;
+        float magnitude() const;
 
-        float dot(Vec3 other);
-        Vec3 cross(Vec3 other);
+        float dot(Vec3 other) const;
+        Vec3 cross(Vec3 other) const;
 
-        Vec3 normalized();
+        Vec3 normalized() const;
 
-        bool approx(Vec3 other);
-        bool approx(Vec3 other, float epsilon);
+        bool approx(Vec3 other) const;
+        bool approx(Vec3 other, float epsilon) const;
     };
 
     bool operator==(Vec3 lhs, Vec3 rhs);
