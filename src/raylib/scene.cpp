@@ -19,7 +19,7 @@ namespace raylib {
         for (auto &&object : m_objects) {
             HitInfo newHit = object.surface->checkHit(ray, object.position);
             if (newHit) {
-                bool isCloser = hit.position.magnitude() >= newHit.position.magnitude();
+                bool isCloser = hit.position.distance(ray.origin) >= newHit.position.distance(ray.origin);
                 if (isCloser || !hit) { 
                     hit = newHit;
                     hitObject = object;
