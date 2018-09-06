@@ -8,7 +8,7 @@ namespace {
 
 namespace raylib {
     void raytrace(const Scene &scene, const Camera &camera, Image &image) {
-        float aspectRatio = static_cast<float>(image.height()) / static_cast<float>(image.width());
+        float aspectRatio = static_cast<float>(image.width()) / static_cast<float>(image.height());
         float verticalFOV = camera.fov() * deg2rad;
         float horizontalFOV = 2.0f * std::atan(std::tan(verticalFOV / 2.0f) * aspectRatio);
         float stepX = (camera.fov() / image.height()) * deg2rad;
