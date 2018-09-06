@@ -19,7 +19,6 @@ namespace raylib {
         Vec3 cameraForward = camera.forward();
         Vec3 cameraPosition = camera.getPosition();
 
-        Color backgroundColor(0.25f, 0.5f, 0.8f, 1.0f);
         for (int y = 0; y < image.height(); ++y) {
             for (int x = 0; x < image.width(); ++x) {
                 Mat4 rotateX = Mat4::rotate(cameraRight, stepX * ((image.height() / 2) - y)); // Y = 0 is the top of the screen, so we need to move down
@@ -28,7 +27,7 @@ namespace raylib {
                 Vec3 rayDirection = rotateX * rotateY * cameraForward;
                 Ray ray(cameraPosition, rayDirection);
 
-                image.pixelAt(x, y) = backgroundColor;
+                image.pixelAt(x, y) = scene.backgroundColor();
 
                 HitInfo hit = scene.checkHit(ray);
                 if (hit) {
