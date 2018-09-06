@@ -104,6 +104,11 @@ namespace raylib {
         return Vec3(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x);
     }
 
+    float distance(Vec3 other) const {
+        // TODO: Test
+        return ((*this) - other).magnitude();
+    }
+
     Vec3 Vec3::normalized() const {
         if (x == 0.0f && y == 0.0f && z == 0.0f) { return Vec3(); }
         return (*this) / this->magnitude();

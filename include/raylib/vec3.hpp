@@ -29,6 +29,8 @@ namespace raylib {
 
         Vec3 reflect(Vec3 normal) const;
 
+        float distance(Vec3 other) const;
+
         bool approx(Vec3 other) const;
         bool approx(Vec3 other, float epsilon) const;
 
