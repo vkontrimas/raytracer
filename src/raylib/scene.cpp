@@ -56,6 +56,9 @@ namespace raylib {
 
         Vec3 rayDirection(startX, startY, -camera.drawDistance());
 
+        // TEMP: Progress printing for large images.
+        int pixelsProcessed =0;
+        int pixelsSinceLastMessage = 0;
         for (int y = 0; y < image.height(); ++y) {
             for (int x = 0; x < image.width(); ++x) {
                 Color color;
@@ -73,6 +76,15 @@ namespace raylib {
             }
             rayDirection.x = startX;
             rayDirection.y += stepY;
+
+            // TEMP: Progress printing for large images.
+            pixelsProcessed += image.width();
+            pixelsSinceLastMessage += image.width();
+            int printThreshold = (image.pixelCount() / 100) * 5;
+            if (pixelsSinceLastMessage >= printThreshold) {
+                std::cout << "Scene::raytrace progress: " << (int)((pixelsProcessed / (float)image.pixelCount()) * 100.0f) << "%" << std::endl;
+                pixelsSinceLastMessage = 0;
+            }
         }
     }
 }
