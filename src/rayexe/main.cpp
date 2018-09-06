@@ -28,6 +28,9 @@ int main() {
 
     Camera camera(Vec3(), Vec3(0.0f, 0.0f, -1.0f));
 
+    RaytracerConfig config;
+    config.samplesPerPixel = 20;
+
 #ifdef BENCH
     std::chrono::milliseconds totalTime = {};
     const int numIterations = 10;
@@ -36,7 +39,7 @@ int main() {
     for (int i = 0; i < numIterations; ++i) {
         auto start = benchclock::now();
 
-        scene.raytrace(camera, image);
+        scene.raytrace(camera, image, config);
 
         auto end = benchclock::now();
         std::chrono::milliseconds time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
@@ -45,7 +48,7 @@ int main() {
     }
     std::cout << "Total: " << totalTime.count() << "ms\nAverage: " << totalTime.count() / numIterations << "ms" << std::endl;
 #else
-    scene.raytrace(camera, image);
+    scene.raytrace(camera, image, config);
 #endif
 
     // NOTE: Writing twice for now, to make it easier to open the most recent image.
