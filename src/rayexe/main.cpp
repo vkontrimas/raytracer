@@ -12,7 +12,7 @@ using benchclock = std::chrono::high_resolution_clock;
 int main() {
     Image image(360, 240);
 
-    Scene scene;
+    Scene scene(Color(0.25f, 0.5f, 0.8f));
 
     Sphere a(0.5f);
     Sphere b(0.6f);
