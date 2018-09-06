@@ -10,7 +10,7 @@ using namespace raylib;
 using benchclock = std::chrono::high_resolution_clock;
 
 int main() {
-    Image image(728, 432);
+    Image image(360, 240);
 
     Scene scene;
 
@@ -18,11 +18,13 @@ int main() {
     Sphere b(0.6f);
     Sphere c(2.5f);
     Sphere d;
+    Sphere e(398.0f);
 
     scene.addObject(Object(Vec3(1.0f, -0.5f, -5.0f), &a));
     scene.addObject(Object(Vec3(-1.0f, 0.0f, -2.0f), &b));
     scene.addObject(Object(Vec3(1.0f, 0.0f, -15.0f), &c));
     scene.addObject(Object(Vec3(0.0f, 0.0f, -10.0f), &d));
+    scene.addObject(Object(Vec3(0.0f, -400.0f, 0.0f), &e, Color(1.0f, 0.5f, 0.0f)));
 
     Camera camera(Vec3(), Vec3(0.0f, 0.0f, -1.0f));
 
