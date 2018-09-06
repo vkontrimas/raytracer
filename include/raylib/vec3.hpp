@@ -31,6 +31,8 @@ namespace raylib {
 
         bool approx(Vec3 other) const;
         bool approx(Vec3 other, float epsilon) const;
+
+        static Vec3 randomUnit();
     };
 
     bool operator==(Vec3 lhs, Vec3 rhs);

@@ -1,14 +1,11 @@
 #include <raylib/scene.hpp>
+#include <raylib/util.hpp>
 #include <vector>
-#include <random>
 #include <iostream>
 #include <cmath>
 
 namespace {
     const float deg2rad = 0.0174532f;
-    // TEMP: TODO: Create a centralized random number facility.
-    std::mt19937 randomGen; // TODO: Remember to seed in the future. (Identical seed useful right now for repeatability.)
-    std::uniform_real_distribution<float> random(0.0f, 1.0f);
 }
 
 namespace raylib {
@@ -64,7 +61,7 @@ namespace raylib {
                 Color color;
 
                 for (int i = 0; i < config.samplesPerPixel; ++i) {
-                    Vec3 offset = Vec3(stepX * random(randomGen), stepY * random(randomGen), 0.0f);
+                    Vec3 offset = Vec3(stepX * randomFloat01(), stepY * randomFloat01(), 0.0f);
                     Ray ray(cameraPosition, (cameraTransform * (rayDirection + offset)).normalized());
                     color += simulateRay(ray);
                 }

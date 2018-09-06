@@ -4,6 +4,7 @@
 
 namespace raylib {
     bool approx(float a, float b, float epsilon = 0.0001f);
+    float randomFloat01();
 }
 
 #endif /*RAYTRACER_UTIL_HPP*/

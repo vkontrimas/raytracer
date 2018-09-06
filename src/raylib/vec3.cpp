@@ -123,4 +123,8 @@ namespace raylib {
     bool Vec3::approx(Vec3 other, float epsilon) const {
         return raylib::approx(x, other.x, epsilon) && raylib::approx(y, other.y, epsilon) && raylib::approx(z, other.z, epsilon);
     }
+
+    Vec3 Vec3::randomUnit() {
+        return Vec3(randomFloat01(), randomFloat01(), randomFloat01()).normalized();
+    }
 }
