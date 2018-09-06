@@ -13,7 +13,7 @@ namespace raylib {
         m_objects.push_back(object);
     }
 
-    Color Scene::simulateRay(Ray ray) const {
+    Color Scene::simulateRay(Ray ray, int currentBounce, const int maxBounces) const {
         HitInfo hit = {};
         Object hitObject;
         for (auto &&object : m_objects) {
@@ -29,7 +29,13 @@ namespace raylib {
 
         if (hit) {
             ScatterInfo scatterInfo = hitObject.material->scatterRay(ray, hit);
-            return scatterInfo.attenuation * simulateRay(scatterInfo.outgoingRay);
+
+            if (currentBounce + 1 < maxBounces) {
+                return scatterInfo.attenuation * simulateRay(scatterInfo.outgoingRay, currentBounce + 1, maxBounces);
+            }
+            else {
+                return Color(0.0f); // Return black if we can't bounce anymore.
+            }
         }
         else {
             return backgroundColor();
@@ -63,7 +69,7 @@ namespace raylib {
                 for (int i = 0; i < config.samplesPerPixel; ++i) {
                     Vec3 offset = Vec3(stepX * randomFloat01(), stepY * randomFloat01(), 0.0f);
                     Ray ray(cameraPosition, (cameraTransform * (rayDirection + offset)).normalized());
-                    color += simulateRay(ray);
+                    color += simulateRay(ray, 1, config.maxBounces);
                 }
 
                 color /= config.samplesPerPixel;
