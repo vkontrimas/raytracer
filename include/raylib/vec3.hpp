@@ -27,6 +27,8 @@ namespace raylib {
 
         Vec3 normalized() const;
 
+        Vec3 reflect(Vec3 normal) const;
+
         bool approx(Vec3 other) const;
         bool approx(Vec3 other, float epsilon) const;
     };

@@ -109,6 +109,13 @@ namespace raylib {
         return (*this) / this->magnitude();
     }
 
+    Vec3 Vec3::reflect(Vec3 normal) const {
+        // TODO: Test
+        Vec3 par = normal * dot(normal);
+        Vec3 perp = (*this) - par;
+        return perp - par;
+    }
+
     bool Vec3::approx(Vec3 other) const {
         return raylib::approx(x, other.x) && raylib::approx(y, other.y) && raylib::approx(z, other.z);
     }
