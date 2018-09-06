@@ -24,6 +24,9 @@ int main() {
     scene.addObject(Object(Vec3(1.0f, 0.0f, -15.0f), &c));
     scene.addObject(Object(Vec3(0.0f, 0.0f, -10.0f), &d));
 
+    Camera camera(Vec3(), Vec3(0.0f, 0.0f, -1.0f));
+
+#ifdef BENCH
     std::chrono::milliseconds totalTime = {};
     const int numIterations = 10;
     std::cout << "Image size: " << image.width() << " x " << image.height() << std::endl;
@@ -31,7 +34,7 @@ int main() {
     for (int i = 0; i < numIterations; ++i) {
         auto start = benchclock::now();
 
-        scene.raytrace(Camera(Vec3(), Vec3(0.0f, 0.0f, -1.0f)), image);
+        scene.raytrace(camera, image);
 
         auto end = benchclock::now();
         std::chrono::milliseconds time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
@@ -39,6 +42,9 @@ int main() {
         std::cout << "[" << i << "/" << numIterations << "]" << "Scene::raytrace time: " << time.count() << "ms" << std::endl; 
     }
     std::cout << "Total: " << totalTime.count() << "ms\nAverage: " << totalTime.count() / numIterations << "ms" << std::endl;
+#else
+    scene.raytrace(camera, image);
+#endif
 
     // NOTE: Writing twice for now, to make it easier to open the most recent image.
     rayexe::writePNG("latest.png", image);
