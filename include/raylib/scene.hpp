@@ -11,6 +11,10 @@
 #include <memory>
 
 namespace raylib {
+    struct RaytracerConfig {
+        int samplesPerPixel = 4;
+    };
+
     struct Object {
         Vec3 position = Vec3(0.0f);
         Surface *surface = nullptr;
@@ -30,7 +34,7 @@ namespace raylib {
         Color &backgroundColor() { return m_backgroundColor; }
         const Color &backgroundColor() const { return m_backgroundColor; }
 
-        void raytrace(const Camera &camera, Image &image) const;
+        void raytrace(const Camera &camera, Image &image, RaytracerConfig = RaytracerConfig()) const;
 
     private:
         Color m_backgroundColor;
