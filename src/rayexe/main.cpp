@@ -14,7 +14,9 @@ int main() {
 
     raylib::raytrace(scene, Camera(Vec3(), Vec3(0.0f, 0.0f, -1.0f)), image);
 
-    rayexe::writePNG("test.png", image);
+    // NOTE: Writing twice for now, to make it easier to open the most recent image.
+    rayexe::writePNG("latest.png", image);
+    rayexe::writePNGTimestamped(image);
 
     return 0;
 }
