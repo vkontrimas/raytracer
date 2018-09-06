@@ -1,6 +1,7 @@
 #include <raylib/scene.hpp>
 #include <vector>
 #include <random>
+#include <iostream>
 #include <cmath>
 
 namespace {
@@ -27,7 +28,15 @@ namespace raylib {
                 }
             }
         }
-        return hit ? hitObject.color : backgroundColor();
+
+        if (hit) {
+            Vec3 randomVector = Vec3(random(randomGen), random(randomGen), random(randomGen)).normalized();
+            Ray newRay(hit.position, hit.normal + randomVector);
+            return 0.5f * simulateRay(newRay);
+        }
+        else {
+            return backgroundColor();
+        }
     }
 
     void Scene::raytrace(const Camera &camera, Image &image, RaytracerConfig config) const {
