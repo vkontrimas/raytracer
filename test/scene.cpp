@@ -12,8 +12,9 @@ TEST_CASE("Scene initialization", "[scene][init]") {
 
 TEST_CASE("Scene ray intersection", "[scene][ray]") {
     Scene scene;
-    scene.addSurface(Sphere(Vec3(0.0f, 0.0f, -10.0f), 1.0f));
-    scene.addSurface(Sphere(Vec3(0.0f, 0.0f, -20.0f), 1.0f));
+    Sphere sphere;
+    scene.addObject(Object(Vec3(0.0f, 0.0f, -10.0f), &sphere));
+    scene.addObject(Object(Vec3(0.0f, 0.0f, -20.0f), &sphere));
 
     SECTION("Hit") {
         Ray ray(Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, -1.0f));

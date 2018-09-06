@@ -8,7 +8,7 @@
 namespace raylib {
     class Surface {
     public:
-        virtual HitInfo checkHit(Ray ray) const = 0;
+        virtual HitInfo checkHit(Ray ray, Vec3 position) const = 0;
     };
 }
 

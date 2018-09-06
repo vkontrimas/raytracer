@@ -4,27 +4,26 @@
 using namespace raylib;
 
 TEST_CASE("Sphere initialization", "[surfaces][sphere][init]") {
-    SECTION("Position and no radius") {
-        Sphere sphere(Vec3(1.0f, 2.0f, 3.0f));
-        CHECK(sphere.position() == Vec3(1.0f, 2.0f, 3.0f));
+    SECTION("No radius") {
+        Sphere sphere;
         CHECK(sphere.radius() == 1.0f);
     }
 
-    SECTION("Position and radius") {
-        Sphere sphere(Vec3(1.0f, 2.0f, 3.0f), 123.0f);
-        CHECK(sphere.position() == Vec3(1.0f, 2.0f, 3.0f));
+    SECTION("Radius") {
+        Sphere sphere(123.0f);
         CHECK(sphere.radius() == 123.0f);
     }
 }
 
 TEST_CASE("Sphere intersection", "[surfaces][sphere][math][ray]") {
     SECTION("Axis aligned") {
-        Sphere sphere(Vec3(0.0f, 0.0f, -10.0f), 1.0f);
+        Sphere sphere(1.0f);
+        Vec3 position(0.0f, 0.0f, -10.0f);
         INFO(sphere);
 
         SECTION("Hit") {
             Ray ray(Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, -1.0f));
-            HitInfo result = sphere.checkHit(ray);
+            HitInfo result = sphere.checkHit(ray, position);
             INFO(ray << "\nResult position: " << result.position << "\nResult normal" << result.normal);
             CHECK(result.hit);
             CHECK(result.position.approx(Vec3(0.0f, 0.0f, -9.0f)));
@@ -33,7 +32,7 @@ TEST_CASE("Sphere intersection", "[surfaces][sphere][math][ray]") {
 
         SECTION("Hit 2") {
             Ray ray(Vec3(0.5f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, -1.0f));
-            HitInfo result = sphere.checkHit(ray);
+            HitInfo result = sphere.checkHit(ray, position);
             INFO(ray << "\nResult position: " << result.position << "\nResult normal" << result.normal);
             CHECK(result.hit);
             // TODO
@@ -41,7 +40,7 @@ TEST_CASE("Sphere intersection", "[surfaces][sphere][math][ray]") {
 
         SECTION("Scrape") {
             Ray ray(Vec3(0.99999f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, -1.0f));
-            HitInfo result = sphere.checkHit(ray);
+            HitInfo result = sphere.checkHit(ray, position);
             INFO(ray << "\nResult position: " << result.position << "\nResult normal" << result.normal);
             CHECK(result.hit);
             // TODO
@@ -50,14 +49,14 @@ TEST_CASE("Sphere intersection", "[surfaces][sphere][math][ray]") {
         SECTION("Miss") {
             Ray ray(Vec3(1.1f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, -1.0f));
             INFO(ray);
-            HitInfo result = sphere.checkHit(ray);
+            HitInfo result = sphere.checkHit(ray, position);
             CHECK_FALSE(result.hit);
         }
 
         SECTION("Opposite direction") {
             Ray ray(Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f));
             INFO(ray);
-            HitInfo result = sphere.checkHit(ray);
+            HitInfo result = sphere.checkHit(ray, position);
             CHECK_FALSE(result.hit);
         }
     }

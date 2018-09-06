@@ -7,7 +7,6 @@ add_library(raylib STATIC
             util.cpp
             surfaces/sphere.cpp
             scene.cpp
-            raytrace.cpp
             mat4.cpp
 )
 

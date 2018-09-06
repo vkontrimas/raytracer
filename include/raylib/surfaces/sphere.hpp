@@ -9,18 +9,14 @@
 namespace raylib {
     class Sphere : public Surface {
     public:
-        Sphere(Vec3 position, float radius = 1.0f);
+        Sphere(float radius = 1.0f);
 
-        virtual HitInfo checkHit(Ray ray) const;
-
-        Vec3 &position() { return m_position; }
-        const Vec3 &position() const { return m_position; }
+        virtual HitInfo checkHit(Ray ray, Vec3 position) const;
 
         float &radius() { return m_radius; }
         const float &radius() const { return m_radius; }
 
     private:
-        Vec3 m_position;
         float m_radius;
     };
 
