@@ -11,7 +11,7 @@
 namespace raylib {
     class Scene {
     public:
-        Scene(Color backgroundColor = Color(0.25f, 0.5f, 0.8f)) : m_backgroundColor(backgroundColor) {}
+        Scene(Color backgroundColor = Color(0.0f)) : m_backgroundColor(backgroundColor) {}
 
         template<class T>
         void addSurface(T &&surface) {
