@@ -8,6 +8,7 @@ add_library(raylib STATIC
             surfaces/sphere.cpp
             scene.cpp
             mat4.cpp
+            materials/diffuse.cpp
 )
 
 target_compile_features(raylib PRIVATE cxx_std_11)

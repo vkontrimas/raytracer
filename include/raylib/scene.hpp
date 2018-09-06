@@ -6,6 +6,7 @@
 #include <raylib/color.hpp>
 #include <raylib/camera.hpp>
 #include <raylib/image.hpp>
+#include <raylib/material.hpp>
 #include <utility>
 #include <vector>
 #include <memory>
@@ -18,11 +19,11 @@ namespace raylib {
     struct Object {
         Vec3 position = Vec3(0.0f);
         Surface *surface = nullptr;
-        Color color = Color(1.0f, 0.0f, 1.0f);
+        Material *material = nullptr;
 
         Object() {}
-        Object(Vec3 position_, Surface *surface_, Color color_ = Color(1.0f)) : 
-            position(position_), surface(surface_), color(color_) {}
+        Object(Vec3 position_, Surface *surface_, Material *material_) : 
+            position(position_), surface(surface_), material(material_) {}
     };
 
     class Scene {

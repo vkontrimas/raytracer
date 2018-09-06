@@ -10,6 +10,7 @@ namespace raylib {
         Vec3 origin;
         Vec3 direction;
 
+        Ray() : origin(0.0f), direction(0.0f) {}
         Ray(Vec3 origin_, Vec3 direction_) : origin(origin_), direction(direction_) {}
     };
 

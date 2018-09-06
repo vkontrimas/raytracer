@@ -6,6 +6,7 @@
 
 namespace {
     const float deg2rad = 0.0174532f;
+    // TEMP: TODO: Create a centralized random number facility.
     std::mt19937 randomGen; // TODO: Remember to seed in the future. (Identical seed useful right now for repeatability.)
     std::uniform_real_distribution<float> random(0.0f, 1.0f);
 }
@@ -30,9 +31,8 @@ namespace raylib {
         }
 
         if (hit) {
-            Vec3 randomVector = Vec3(random(randomGen), random(randomGen), random(randomGen)).normalized();
-            Ray newRay(hit.position, hit.normal + randomVector);
-            return 0.5f * simulateRay(newRay);
+            ScatterInfo scatterInfo = hitObject.material->scatterRay(ray, hit);
+            return scatterInfo.attenuation * simulateRay(scatterInfo.outgoingRay);
         }
         else {
             return backgroundColor();
@@ -56,6 +56,9 @@ namespace raylib {
 
         Vec3 rayDirection(startX, startY, -camera.drawDistance());
 
+        // TEMP: Progress printing for large images.
+        int pixelsProcessed =0;
+        int pixelsSinceLastMessage = 0;
         for (int y = 0; y < image.height(); ++y) {
             for (int x = 0; x < image.width(); ++x) {
                 Color color;
@@ -73,6 +76,15 @@ namespace raylib {
             }
             rayDirection.x = startX;
             rayDirection.y += stepY;
+
+            // TEMP: Progress printing for large images.
+            pixelsProcessed += image.width();
+            pixelsSinceLastMessage += image.width();
+            int printThreshold = (image.pixelCount() / 100) * 5;
+            if (pixelsSinceLastMessage >= printThreshold) {
+                std::cout << "Scene::raytrace progress: " << (int)((pixelsProcessed / (float)image.pixelCount()) * 100.0f) << "%" << std::endl;
+                pixelsSinceLastMessage = 0;
+            }
         }
     }
 }
