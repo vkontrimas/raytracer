@@ -5,7 +5,7 @@
 using namespace raylib;
 
 int main() {
-    Image image(256, 256);
+    Image image(728, 432);
 
     Scene scene;
     scene.addSurface(Sphere(Vec3(1.0f, -0.5f, -5.0f), 0.5f));
