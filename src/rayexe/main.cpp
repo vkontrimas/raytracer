@@ -17,7 +17,7 @@ int main() {
     Scene scene(Color(0.25f, 0.5f, 0.8f));
 
     Diffuse grey;
-    Diffuse orange(Color(1.0f, 0.6f, 0.0f));
+    Diffuse orange(Color(0.5f, 0.1f, 0.0f));
     Diffuse red(Color(0.6f, 0.0f, 0.0f));
     Metallic silver(Color(0.6f, 0.6f, 0.75f));
     Metallic foil(Color(0.6f, 0.6f, 0.75f), 1.0f);
@@ -31,6 +31,9 @@ int main() {
     scene.addObject(Object(Vec3(1.0f, -0.5f, -5.0f), &a, &foil));
     scene.addObject(Object(Vec3(-1.0f, 0.0f, -2.0f), &b, &silver));
     scene.addObject(Object(Vec3(1.0f, 0.0f, -15.0f), &c, &grey));
+    scene.addObject(Object(Vec3(1.0f, 3.0f, -15.0f), &c, &red));
+    scene.addObject(Object(Vec3(1.0f, 6.0f, -15.0f), &c, &orange));
+    scene.addObject(Object(Vec3(8.0f, 0.0f, -17.0f), &c, &silver));
     scene.addObject(Object(Vec3(0.0f, 0.0f, -10.0f), &d, &grey));
     scene.addObject(Object(Vec3(0.0f, -400.0f, 0.0f), &e, &orange));
 
