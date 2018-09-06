@@ -2,7 +2,7 @@
 #include <cmath>
 
 namespace raylib {
-    Camera::Camera(Vec3 position, Vec3 direction, float fov) : m_fov(fov) {
+    Camera::Camera(Vec3 position, Vec3 direction, float fov, float distance) : m_fov(fov), m_distance(distance) {
         m_transform = Mat4::translate(position);
         lookTowards(direction);
     }

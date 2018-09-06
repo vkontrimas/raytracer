@@ -8,13 +8,16 @@
 namespace raylib {
     class Camera {
     public:
-        Camera(Vec3 position, Vec3 direction, float fov = 60.0f);
+        Camera(Vec3 position, Vec3 direction, float fov = 60.0f, float distance = 1000.0f);
 
         Vec3 getPosition() const;
         void setPosition(Vec3 position);
 
         float &fov() { return m_fov; }
         const float &fov() const { return m_fov; }
+
+        float &drawDistance() { return m_distance; }
+        const float &drawDistance() const { return m_distance; }
 
         const Mat4 &getTransform() const { return m_transform; }
 
@@ -50,6 +53,7 @@ namespace raylib {
     private:
         Mat4 m_transform;
         float m_fov;
+        float m_distance;
     };
 }
 #endif /*RAYTRACER_CAMERA_HPP*/
