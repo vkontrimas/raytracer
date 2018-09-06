@@ -8,7 +8,7 @@
 namespace raylib {
     class Camera {
     public:
-        Camera(Vec3 position, Vec3 direction, float fov = 80.0f);
+        Camera(Vec3 position, Vec3 direction, float fov = 60.0f);
 
         Vec3 getPosition() const;
         void setPosition(Vec3 position);
