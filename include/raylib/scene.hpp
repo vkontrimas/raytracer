@@ -19,10 +19,6 @@ namespace raylib {
         Object() {}
         Object(Vec3 position_, Surface *surface_, Color color_ = Color(1.0f)) : 
             position(position_), surface(surface_), color(color_) {}
-
-        HitInfo checkHit(Ray ray) const {
-            return surface->checkHit(ray, position);
-        }
     };
 
     class Scene {
@@ -30,7 +26,6 @@ namespace raylib {
         Scene(Color backgroundColor = Color(0.0f)) : m_backgroundColor(backgroundColor) {}
 
         void addObject(Object object);
-        HitInfo checkHit(Ray ray) const;
 
         Color &backgroundColor() { return m_backgroundColor; }
         const Color &backgroundColor() const { return m_backgroundColor; }

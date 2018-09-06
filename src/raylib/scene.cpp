@@ -5,22 +5,6 @@ namespace {
 }
 
 namespace raylib {
-    HitInfo Scene::checkHit(Ray ray) const {
-        HitInfo closestHit = {};
-
-        for (auto &&object : m_objects) {
-            HitInfo hit = object.checkHit(ray);
-            if (hit) {
-                bool isCloser = closestHit.position.magnitude() >= hit.position.magnitude();
-                if (isCloser || !closestHit.hit) { 
-                    closestHit = hit;
-                }
-            }
-        }
-
-        return closestHit;
-    }
-
     void Scene::addObject(Object object) {
         m_objects.push_back(object);
     }
@@ -48,7 +32,7 @@ namespace raylib {
                 HitInfo hit = {};
                 Object hitObject;
                 for (auto &&object : m_objects) {
-                    HitInfo newHit = object.checkHit(ray);
+                    HitInfo newHit = object.surface->checkHit(ray, object.position);
                     if (newHit) {
                         bool isCloser = hit.position.magnitude() >= newHit.position.magnitude();
                         if (isCloser || !hit) { 
