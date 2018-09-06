@@ -11,7 +11,6 @@ namespace raylib {
         r += other.r;
         g += other.g;
         b += other.b;
-        a += other.a;
         return *this;
     }
 
@@ -19,7 +18,6 @@ namespace raylib {
         r -= other.r;
         g -= other.g;
         b -= other.b;
-        a -= other.a;
         return *this;
     }
 
@@ -27,7 +25,6 @@ namespace raylib {
         r *= other.r;
         g *= other.g;
         b *= other.b;
-        a *= other.a;
         return *this;
     }
 
@@ -35,7 +32,6 @@ namespace raylib {
         r *= value;
         g *= value;
         b *= value;
-        a *= value;
         return *this;
     }
 
@@ -43,7 +39,6 @@ namespace raylib {
         r /= value;
         g /= value;
         b /= value;
-        a /= value;
         return *this;
     }
 
