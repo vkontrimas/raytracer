@@ -36,6 +36,14 @@ namespace raylib {
             return rs * Vec3(0.0f, 1.0f, 0.0f);
         }
 
+        Vec3 right() const { 
+            Mat4 rs = m_transform;
+            rs.m14 = 0.0f;
+            rs.m24 = 0.0f;
+            rs.m34 = 0.0f;
+            return rs * Vec3(1.0f, 0.0f, 0.0f);
+        }
+
         void lookTowards(Vec3 direction);
         void lookAt(Vec3 position);
 
