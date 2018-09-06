@@ -39,6 +39,8 @@ namespace raylib {
     private:
         Color m_backgroundColor;
         std::vector<Object> m_objects;
+
+        Color simulateRay(Ray initialRay) const;
     };
 }
 #endif /*RAYTRACER_SCENE_HPP*/

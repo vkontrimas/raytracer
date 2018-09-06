@@ -1,9 +1,12 @@
 #include <raylib/scene.hpp>
 #include <vector>
 #include <random>
+#include <cmath>
 
 namespace {
     const float deg2rad = 0.0174532f;
+    std::mt19937 randomGen; // TODO: Remember to seed in the future. (Identical seed useful right now for repeatability.)
+    std::uniform_real_distribution<float> random(0.0f, 1.0f);
 }
 
 namespace raylib {
@@ -11,10 +14,23 @@ namespace raylib {
         m_objects.push_back(object);
     }
 
-    void Scene::raytrace(const Camera &camera, Image &image, RaytracerConfig config) const {
-        std::mt19937 randomGen; // TODO: Remember to seed in the future. (Identical seed useful right now for repeatability.)
-        std::uniform_real_distribution<float> random(0.0f, 1.0f);
+    Color Scene::simulateRay(Ray ray) const {
+        HitInfo hit = {};
+        Object hitObject;
+        for (auto &&object : m_objects) {
+            HitInfo newHit = object.surface->checkHit(ray, object.position);
+            if (newHit) {
+                bool isCloser = hit.position.magnitude() >= newHit.position.magnitude();
+                if (isCloser || !hit) { 
+                    hit = newHit;
+                    hitObject = object;
+                }
+            }
+        }
+        return hit ? hitObject.color : backgroundColor();
+    }
 
+    void Scene::raytrace(const Camera &camera, Image &image, RaytracerConfig config) const {
         float aspectRatio = static_cast<float>(image.width()) / static_cast<float>(image.height());
         float verticalFOV = camera.fov() * deg2rad;
 
@@ -38,21 +54,7 @@ namespace raylib {
                 for (int i = 0; i < config.samplesPerPixel; ++i) {
                     Vec3 offset = Vec3(stepX * random(randomGen), stepY * random(randomGen), 0.0f);
                     Ray ray(cameraPosition, (cameraTransform * (rayDirection + offset)).normalized());
-
-                    HitInfo hit = {};
-                    Object hitObject;
-                    for (auto &&object : m_objects) {
-                        HitInfo newHit = object.surface->checkHit(ray, object.position);
-                        if (newHit) {
-                            bool isCloser = hit.position.magnitude() >= newHit.position.magnitude();
-                            if (isCloser || !hit) { 
-                                hit = newHit;
-                                hitObject = object;
-                            }
-                        }
-                    }
-
-                    color += hit ? hitObject.color : backgroundColor();
+                    color += simulateRay(ray);
                 }
 
                 color /= config.samplesPerPixel;
