@@ -10,7 +10,8 @@ int main() {
     Scene scene;
     scene.addSurface(Sphere(Vec3(1.0f, -0.5f, -5.0f), 0.5f));
     scene.addSurface(Sphere(Vec3(0.0f, 0.0f, -10.0f)));
-    scene.addSurface(Sphere(Vec3(1.0f, 0.0f, -15.0f), 0.5f));
+    scene.addSurface(Sphere(Vec3(1.0f, 0.0f, -15.0f), 2.5f));
+    scene.addSurface(Sphere(Vec3(-1.0f, 0.0f, -2.0f), 0.6f));
 
     raylib::raytrace(scene, Camera(Vec3(), Vec3(0.0f, 0.0f, -1.0f)), image);
 
