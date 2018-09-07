@@ -13,11 +13,10 @@ namespace raylib {
 
         virtual HitInfo checkHit(Ray ray, Vec3 position) const;
 
-        float &radius() { return m_radius; }
-        const float &radius() const { return m_radius; }
+        float radius() const;
 
     private:
-        float m_radius;
+        float m_radiusSqr;
     };
 
     std::ostream &operator<<(std::ostream &stream, Sphere sphere);
