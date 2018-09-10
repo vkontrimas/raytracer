@@ -4,6 +4,7 @@
 #include <raylib/image.hpp>
 #include <raylib/materials/diffuse.hpp>
 #include <raylib/materials/metallic.hpp>
+#include <raylib/materials/clear.hpp>
 #include <chrono>
 #include <iostream>
 #include "io.hpp"
@@ -20,7 +21,7 @@ int main() {
     Diffuse orange(Color(0.5f, 0.1f, 0.0f));
     Diffuse red(Color(0.6f, 0.0f, 0.0f));
     Metallic silver(Color(0.6f, 0.6f, 0.75f));
-    Metallic foil(Color(0.6f, 0.6f, 0.75f), 1.0f);
+    Clear glass(Color(1.0f, 1.0f, 1.0f), 1.5f);
 
     Sphere a(0.5f);
     Sphere b(0.6f);
@@ -28,8 +29,8 @@ int main() {
     Sphere d;
     Sphere e(398.0f);
 
-    scene.addObject(Object(Vec3(1.0f, -0.5f, -5.0f), &a, &foil));
-    scene.addObject(Object(Vec3(-1.0f, 0.0f, -2.0f), &b, &silver));
+    scene.addObject(Object(Vec3(1.0f, -0.5f, -5.0f), &a, &glass));
+    scene.addObject(Object(Vec3(-1.0f, 0.0f, -2.0f), &b, &glass));
     scene.addObject(Object(Vec3(1.0f, 0.0f, -15.0f), &c, &grey));
     scene.addObject(Object(Vec3(1.0f, 3.0f, -15.0f), &c, &red));
     scene.addObject(Object(Vec3(1.0f, 6.0f, -15.0f), &c, &orange));
