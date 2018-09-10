@@ -1,4 +1,5 @@
 #include <raylib\materials\clear.hpp>
+#include <raylib\util.hpp>
 #include <algorithm>
 
 namespace raylib {
@@ -28,25 +29,51 @@ namespace raylib {
         float n = n1 / n2;
 
         /*
-         * Calculate refraction
+         * Calculate values for refraction and detecting total internal refrection (TIR).
          */
         float sinRefraction = n * std::sqrt(1.0f - cosIncidence * cosIncidence);
         float determinant = 1.0f - sinRefraction * sinRefraction;
+        bool totalInternalReflection = determinant < 0.0f;
 
-        ScatterInfo info = {};
-        if (determinant < 0.0f) {
-            info.outgoingRay = Ray(hit.position, ray.direction.reflect(normal));
+        ScatterInfo scatterInfo = {};
+        if (totalInternalReflection) {
+            scatterInfo.outgoingRay = Ray(hit.position, ray.direction.reflect(normal));
             // DEBUG:
             //info.attenuation = Color(1.0f, 0.0f, 0.0f);
         }
         else {
             float cosRefraction = std::sqrt(determinant);
-            Vec3 refracted = n * ray.direction + (n * cosIncidence - cosRefraction) * normal;
-            info.outgoingRay = Ray(hit.position, refracted);
-            // DEBUG:
-            //info.attenuation = Color(0.0f, 1.0f, 0.0f);
+
+            /*
+             * Fresnel 
+             * This is the true version of Fresnel. Look into the faster Schlick approximation.
+             */
+            float rS = (n1 * cosIncidence - n2 * cosRefraction) / (n1 * cosIncidence + n2 * cosRefraction);
+            rS *= rS;
+            float rP = (n1 * cosRefraction - n2 * cosIncidence) / (n1 * cosRefraction + n2 * cosIncidence);
+            rP *= rP;
+            float reflectance = (rP + rS) / 2.0f;
+
+            /*
+             * NOTE: We're going to randomly decide whether we're reflecting or not for now.
+             * Another idea could be to shoot two rays and sum some percentage of their colours based
+             * on the reflectance and transmisivity?
+             */
+            if (randomFloat01() <= reflectance) {
+                /*
+                 * Reflection
+                 */
+                scatterInfo.outgoingRay = Ray(hit.position, ray.direction.reflect(normal));
+            }
+            else {
+                /*
+                 * Refraction
+                 */
+                Vec3 refracted = n * ray.direction + (n * cosIncidence - cosRefraction) * normal;
+                scatterInfo.outgoingRay = Ray(hit.position, refracted);
+            }
         }
-        info.attenuation = m_albedo;
-        return info;
+        scatterInfo.attenuation = m_albedo;
+        return scatterInfo;
     }
 }
