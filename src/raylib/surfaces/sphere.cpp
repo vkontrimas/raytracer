@@ -20,18 +20,9 @@ namespace raylib {
         float t0 = tca - thc;
         float t1 = tca + thc;
 
-        if (lSqrMagnitude < m_radiusSqr) {
-            // If we're inside, pick the farther point?
-            if (t0 < t1) {
-                using std::swap;
-                swap(t0, t1);
-            }
-        }
-        else {
-            if (t0 > t1) {
-                using std::swap;
-                swap(t0, t1);
-            }
+        if (t0 > t1) {
+            using std::swap;
+            swap(t0, t1);
         }
         if (t0 < 0.0f) { t0 = t1; }
 
