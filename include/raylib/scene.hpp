@@ -43,7 +43,7 @@ namespace raylib {
         Color m_backgroundColor;
         std::vector<Object> m_objects;
 
-        Color simulateRay(Ray initialRay, const int remainingBounces, float rayOriginBias) const;
+        Color simulateRayRecursive(Ray initialRay, const int remainingBounces, float rayOriginBias) const;
     };
 }
 #endif /*RAYTRACER_SCENE_HPP*/
