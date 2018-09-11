@@ -15,6 +15,7 @@ namespace raylib {
     struct RaytracerConfig {
         int samplesPerPixel = 4;
         int maxBounces = 50;
+        float rayOriginBias = 0.001f;
     };
 
     struct Object {
@@ -42,7 +43,7 @@ namespace raylib {
         Color m_backgroundColor;
         std::vector<Object> m_objects;
 
-        Color simulateRay(Ray initialRay, const int remainingBounces) const;
+        Color simulateRay(Ray initialRay, const int remainingBounces, float rayOriginBias) const;
     };
 }
 #endif /*RAYTRACER_SCENE_HPP*/

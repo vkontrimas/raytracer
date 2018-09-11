@@ -13,7 +13,7 @@ namespace raylib {
         m_objects.push_back(object);
     }
 
-    Color Scene::simulateRay(Ray ray, const int remainingBounces) const {
+    Color Scene::simulateRay(Ray ray, const int remainingBounces, float rayOriginBias) const {
         HitInfo hit = {};
         Object hitObject;
         ray.direction = ray.direction.normalized();
@@ -31,14 +31,18 @@ namespace raylib {
         Color result = backgroundColor();
         if (hit) {
             ScatterInfo scatterInfo = hitObject.material->scatterRay(ray, hit);
+            Vec3 bias = hit.normal * rayOriginBias;
+            scatterInfo.reflection.origin += bias;
+            scatterInfo.refraction.origin -= bias;
+
             if (remainingBounces > 0) {
                 if (scatterInfo.reflectivity == 1.0f) {
-                    return scatterInfo.attenuation * simulateRay(scatterInfo.reflection, remainingBounces - 1);
+                    return scatterInfo.attenuation * simulateRay(scatterInfo.reflection, remainingBounces - 1, rayOriginBias);
                 }
                 else {
                     float transmission = 1.0f - scatterInfo.reflectivity;
-                    Color reflected = simulateRay(scatterInfo.reflection, remainingBounces / 2 - 1);
-                    Color refracted = simulateRay(scatterInfo.refraction, remainingBounces / 2 - 1);
+                    Color reflected = simulateRay(scatterInfo.reflection, remainingBounces / 2 - 1, rayOriginBias);
+                    Color refracted = simulateRay(scatterInfo.refraction, remainingBounces / 2 - 1, rayOriginBias);
                     return scatterInfo.attenuation * (reflected * scatterInfo.reflectivity + refracted * transmission);
                 }
             }
@@ -73,7 +77,7 @@ namespace raylib {
                 for (int i = 0; i < config.samplesPerPixel; ++i) {
                     Vec3 offset = Vec3(stepX * randomFloat01(), stepY * randomFloat01(), 0.0f);
                     Ray ray(cameraPosition, (cameraTransform * (rayDirection + offset)).normalized());
-                    color += simulateRay(ray, config.maxBounces);
+                    color += simulateRay(ray, config.maxBounces, config.rayOriginBias);
                 }
 
                 color /= config.samplesPerPixel;
