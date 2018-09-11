@@ -1,4 +1,5 @@
 #include <raylib/surfaces/sphere.hpp>
+#include <raylib/surfaces/infiniteplane.hpp>
 #include <raylib/scene.hpp>
 #include <raylib/camera.hpp>
 #include <raylib/image.hpp>
@@ -27,7 +28,7 @@ int main() {
     Sphere b(0.6f);
     Sphere c(2.5f);
     Sphere d;
-    Sphere e(398.0f);
+    InfinitePlane plane(Vec3(0.0f, 1.0f, 0.0f));
 
     scene.addObject(Object(Vec3(1.0f, -0.5f, -5.0f), &a, &glass));
     scene.addObject(Object(Vec3(-1.0f, 0.0f, -2.0f), &b, &glass));
@@ -36,7 +37,7 @@ int main() {
     scene.addObject(Object(Vec3(1.0f, 6.0f, -15.0f), &c, &orange));
     scene.addObject(Object(Vec3(8.0f, 0.0f, -17.0f), &c, &silver));
     scene.addObject(Object(Vec3(0.0f, 0.0f, -10.0f), &d, &grey));
-    scene.addObject(Object(Vec3(0.0f, -400.0f, 0.0f), &e, &orange));
+    scene.addObject(Object(Vec3(0.0f, -2.3f, 0.0f), &plane, &orange));
 
     Camera camera(Vec3(), Vec3(0.0f, 0.0f, -1.0f));
 

@@ -6,6 +6,7 @@ add_library(raylib STATIC
             camera.cpp
             util.cpp
             surfaces/sphere.cpp
+            surfaces/infiniteplane.cpp
             scene.cpp
             mat4.cpp
             materials/diffuse.cpp
