@@ -42,7 +42,7 @@ namespace raylib {
         Color m_backgroundColor;
         std::vector<Object> m_objects;
 
-        Color simulateRay(Ray initialRay, int currentBounce, const int maxBounces) const;
+        Color simulateRay(Ray initialRay, const int remainingBounces) const;
     };
 }
 #endif /*RAYTRACER_SCENE_HPP*/

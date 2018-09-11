@@ -1,6 +1,8 @@
 #include <raylib\materials\clear.hpp>
 #include <raylib\util.hpp>
 #include <algorithm>
+#include <iostream>
+#include <cmath>
 
 namespace raylib {
     Clear::Clear(Color albedo, float indexOfRefraction) : m_albedo(albedo), m_indexOfRefraction(indexOfRefraction) {}
@@ -37,7 +39,7 @@ namespace raylib {
 
         ScatterInfo scatterInfo = {};
         if (totalInternalReflection) {
-            scatterInfo.outgoingRay = Ray(hit.position, ray.direction.reflect(normal));
+            scatterInfo.reflection = Ray(hit.position, ray.direction.reflect(normal));
             // DEBUG:
             //info.attenuation = Color(1.0f, 0.0f, 0.0f);
         }
@@ -55,23 +57,16 @@ namespace raylib {
             float reflectance = (rP + rS) / 2.0f;
 
             /*
-             * NOTE: We're going to randomly decide whether we're reflecting or not for now.
-             * Another idea could be to shoot two rays and sum some percentage of their colours based
-             * on the reflectance and transmisivity?
+             * Reflection
              */
-            if (randomFloat01() <= reflectance) {
-                /*
-                 * Reflection
-                 */
-                scatterInfo.outgoingRay = Ray(hit.position, ray.direction.reflect(normal));
-            }
-            else {
-                /*
-                 * Refraction
-                 */
-                Vec3 refracted = n * ray.direction + (n * cosIncidence - cosRefraction) * normal;
-                scatterInfo.outgoingRay = Ray(hit.position, refracted);
-            }
+            scatterInfo.reflection = Ray(hit.position, ray.direction.reflect(normal));
+            scatterInfo.reflectivity = reflectance;
+
+            /*
+             * Refraction
+             */
+            Vec3 refracted = n * ray.direction + (n * cosIncidence - cosRefraction) * normal;
+            scatterInfo.refraction = Ray(hit.position, refracted);
         }
         scatterInfo.attenuation = m_albedo;
         return scatterInfo;

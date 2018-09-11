@@ -13,9 +13,10 @@ namespace raylib {
         m_objects.push_back(object);
     }
 
-    Color Scene::simulateRay(Ray ray, int currentBounce, const int maxBounces) const {
+    Color Scene::simulateRay(Ray ray, const int remainingBounces) const {
         HitInfo hit = {};
         Object hitObject;
+        ray.direction = ray.direction.normalized();
         for (auto &&object : m_objects) {
             HitInfo newHit = object.surface->checkHit(ray, object.position);
             if (newHit) {
@@ -27,19 +28,22 @@ namespace raylib {
             }
         }
 
+        Color result = backgroundColor();
         if (hit) {
             ScatterInfo scatterInfo = hitObject.material->scatterRay(ray, hit);
-
-            if (currentBounce + 1 < maxBounces) {
-                return scatterInfo.attenuation * simulateRay(scatterInfo.outgoingRay, currentBounce + 1, maxBounces);
-            }
-            else {
-                return Color(0.0f); // Return black if we can't bounce anymore.
+            if (remainingBounces > 0) {
+                if (scatterInfo.reflectivity == 1.0f) {
+                    return scatterInfo.attenuation * simulateRay(scatterInfo.reflection, remainingBounces - 1);
+                }
+                else {
+                    float transmission = 1.0f - scatterInfo.reflectivity;
+                    Color reflected = simulateRay(scatterInfo.reflection, remainingBounces / 2 - 1);
+                    Color refracted = simulateRay(scatterInfo.refraction, remainingBounces / 2 - 1);
+                    return scatterInfo.attenuation * (reflected * scatterInfo.reflectivity + refracted * transmission);
+                }
             }
         }
-        else {
-            return backgroundColor();
-        }
+        return result;
     }
 
     void Scene::raytrace(const Camera &camera, Image &image, RaytracerConfig config) const {
@@ -69,7 +73,7 @@ namespace raylib {
                 for (int i = 0; i < config.samplesPerPixel; ++i) {
                     Vec3 offset = Vec3(stepX * randomFloat01(), stepY * randomFloat01(), 0.0f);
                     Ray ray(cameraPosition, (cameraTransform * (rayDirection + offset)).normalized());
-                    color += simulateRay(ray, 1, config.maxBounces);
+                    color += simulateRay(ray, config.maxBounces);
                 }
 
                 color /= config.samplesPerPixel;

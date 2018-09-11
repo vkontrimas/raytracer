@@ -8,8 +8,10 @@
 
 namespace raylib {
     struct ScatterInfo {
-        Ray outgoingRay;
-        Color attenuation;
+        Ray reflection = {};
+        Ray refraction = {};
+        float reflectivity = 1.0f; // When 1.0, refraction ray not simulated!
+        Color attenuation = Color(1.0f, 0.0f, 1.0f);
     };
 
     class Material {
