@@ -1,5 +1,5 @@
-#include <raylib\materials\clear.hpp>
-#include <raylib\util.hpp>
+#include <raylib/materials/clear.hpp>
+#include <raylib/util.hpp>
 #include <algorithm>
 #include <iostream>
 #include <cmath>
